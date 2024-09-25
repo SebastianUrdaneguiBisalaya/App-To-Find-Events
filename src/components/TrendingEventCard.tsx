@@ -21,7 +21,7 @@ export const TrendingEventCard: React.FC<TrendingEventCardProps> = ({
       style={{ backgroundImage: `url(${imageUrl})` }}
       aria-label="Event Card"
     >
-      <div className="bg-[#2D264B80] bg-opacity-50 p-4 rounded-lg max-w-md">
+      <div className="bg-[#2D264B80] bg-opacity-50 p-4 rounded-lg max-w-md mt-20 mb-2">
         <div className="flex justify-between">
           <div>
             <p className="font-semibold text-base text-white">
