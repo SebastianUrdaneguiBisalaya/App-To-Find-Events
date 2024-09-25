@@ -2,6 +2,7 @@ type PropTitle = {
   text: string;
   type: "title" | "subtitle" | "body" | "secondary";
   color: string;
+  className?: string;
 };
 
 function styles(type: PropTitle["type"]) {
@@ -17,10 +18,10 @@ function styles(type: PropTitle["type"]) {
   }
 }
 
-export const Texts = ({ text, type, color = "black" }: PropTitle): JSX.Element => {
+export const Texts = ({ text, type, color = "black", className }: PropTitle): JSX.Element => {
   return (
     <h2
-      className={`${styles(type)} font-poppins`}
+      className={`${styles(type)} font-poppins ${className}`}
       style={{ color: color }}
     >
       {text}
