@@ -1,5 +1,22 @@
-type Props = {};
+import { Button } from "./Button";
 
-const TotalAmountBar = (props: Props) => {
-  return <div>TotalAmountBar</div>;
+type PropTotalAmountBar = {
+  totalAmount: number;
+};
+
+export const TotalAmountBar = ({ totalAmount }: PropTotalAmountBar) => {
+  return (
+    <div>
+      <div>
+        <div>Total:</div>
+        <div>{totalAmount}</div>
+      </div>
+      <div>
+        <Button
+          text="Search"
+          onClick={() => console.log("Search")}
+        />
+      </div>
+    </div>
+  );
 };

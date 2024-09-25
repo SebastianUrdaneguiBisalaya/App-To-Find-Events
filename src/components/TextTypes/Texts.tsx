@@ -17,10 +17,10 @@ function styles(type: PropTitle["type"]) {
   }
 }
 
-export const Texts = ({ text, type, color = "black" }: PropTitle) => {
+export const Texts = ({ text, type, color = "black" }: PropTitle): JSX.Element => {
   return (
     <h2
-      className={`${styles(type)}`}
+      className={`${styles(type)} font-poppins`}
       style={{ color: color }}
     >
       {text}
