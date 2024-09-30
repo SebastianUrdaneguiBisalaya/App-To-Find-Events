@@ -1,42 +1,65 @@
+import React, { useState } from "react";
+
 export const InputSearch = () => {
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(startDate, endDate, searchQuery);
+  };
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="border-2 border-gray-500 rounded-md px-2 py-3 max-w-xs w-full mr-4 ml-4 mt-2 mb-2 flex flex-row items-center justify-between">
+    <div className="max-w-3xl mx-auto p-4">
+      <form
+        onSubmit={handleSearch}
+        className="flex flex-col sm:flex-row items-center gap-2 p-2 bg-white sm:rounded-full rounded-2xl shadow-lg"
+      >
+        <div className="w-full sm:w-auto">
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            className="w-full sm:w-[10rem] px-3 py-2 rounded-full border border-gray-300 focus:outline-none focus_ring-2 focus:ring-primary"
+            placeholder="Fecha inicio"
+          />
+        </div>
+        <div className="w-full sm:w-auto">
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="w-full sm:w-[10rem] px-3 py-2 rounded-full border border-gray-300 focus:outline-none focus_ring-2 focus:ring-primary"
+            placeholder="Fecha fin"
+          />
+        </div>
         <input
           type="text"
-          className="w-full mx-1 px-1 outline-none bg-transparent text-gray-600"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Buscar eventos"
+          className="w-full sm:flex-grow px-4 py-2 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary"
         />
-        <button>
+        <button
+          type="submit"
+          className="w-full sm:w-auto px-4 py-2 bg-primary text-white rounded-full hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
+            className="h-5 w-5 inline-block"
+            fill="none"
             viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <g
-              fill="none"
-              stroke="#000000"
+            <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="2"
-            >
-              <circle
-                cx="11"
-                cy="11"
-                r="8"
-              />
-              <path d="m21 21l-4.3-4.3" />
-            </g>
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
           </svg>
+          <span className="sr-only">Buscar</span>
         </button>
-      </div>
-      <div className="flex flex-row items-center justify-end max-w-xs w-full mr-4 ml-4">
-        <input
-          type="date"
-          className="mx-1 px-1 outline-none bg-transparent text-sm text-gray-600"
-        />
-      </div>
+      </form>
     </div>
   );
 };
