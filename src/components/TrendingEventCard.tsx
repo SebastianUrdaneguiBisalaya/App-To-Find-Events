@@ -17,11 +17,11 @@ export const TrendingEventCard: React.FC<TrendingEventCardProps> = ({
 }) => {
   return (
     <div
-      className="absolute h-[186px] w-[339px] inset-0 flex items-center justify-center p-4 bg-cover bg-center rounded-lg"
+      className="max-h-[186px] max-w-[339px] inset-0 flex items-center justify-center p-4 bg-cover bg-center rounded-lg"
       style={{ backgroundImage: `url(${imageUrl})` }}
       aria-label="Event Card"
     >
-      <div className="bg-[#2D264B80] bg-opacity-50 p-4 rounded-lg max-w-md mt-20 mb-2">
+      <div className="bg-[#2D264B80] bg-opacity-50 p-4 rounded-lg w-[332px] mt-20 mb-2">
         <div className="flex justify-between">
           <div>
             <p className="font-semibold text-base text-white">
