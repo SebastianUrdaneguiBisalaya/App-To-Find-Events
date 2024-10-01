@@ -6,11 +6,11 @@ interface CartIconProps {
 
 export const CartIcon: React.FC<CartIconProps> = ({ itemCount }) => {
   return (
-    <div className="relative w-11">
+    <div className="relative w-9">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        className="h-10 w-10 text-primary-color"
+        className="h-8 w-8 text-primary-color"
       >
         <path
           fill="currentColor"
@@ -31,7 +31,7 @@ export const CartIcon: React.FC<CartIconProps> = ({ itemCount }) => {
       </svg>
 
       {itemCount > 0 && (
-        <div className="absolute top-0 right-0 bg-red-700 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
+        <div className="absolute top-0 right-0 bg-red-700 text-white text-xs font-medium rounded-full h-4 w-4 flex items-center justify-center">
           <span>{itemCount}</span>
         </div>
       )}
