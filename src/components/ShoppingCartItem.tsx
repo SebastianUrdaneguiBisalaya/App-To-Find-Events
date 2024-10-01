@@ -1,3 +1,4 @@
+import { Texts } from "./TextTypes/Texts";
 interface ShoppingCartItemProps {
   title: string;
   price: string;
@@ -7,14 +8,19 @@ interface ShoppingCartItemProps {
 
 export const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({ title, price, taxes, details }) => {
   return (
-    <div className="flex justify-between items-center m-3">
+    <div className="flex justify-between items-center m-3 max-w-[342px]">
       <div>
-        <h4 className="font-[700]">{title}</h4>
+        <h4 className="font-[700] font-poppins">{title}</h4>
         <div className="flex items-center mb-[-8px]">
-          <small className="text-base font-[400] mr-2">{price}</small>
-          <small className="text-xs text-[#7C7C7C] font-[300] "> {taxes}</small>
+          <Texts
+            text={price}
+            type="body"
+            color="black"
+            className="mr-2"
+          />
+          <small className="text-xs text-[#7C7C7C] font-[300] font-poppins"> {taxes}</small>
         </div>
-        <small className="text-xs text-[#7C7C7C] font-[300]">{details}</small>
+        <small className="text-xs text-[#7C7C7C] font-[300] font-poppins">{details}</small>
       </div>
       <div>
         <select
