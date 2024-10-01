@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 import { ToggleSwitch } from "./ToggleSwitch";
 
 interface ToggleSwitchFieldProps {
@@ -6,17 +6,10 @@ interface ToggleSwitchFieldProps {
 }
 
 export const ToggleSwitchField: React.FC<ToggleSwitchFieldProps> = ({ label }) => {
-  const [isChecked, setIsChecked] = useState(false);
-
   return (
-    <div className="mb-4 flex items-center justify-between">
+    <div className="md:w-[22rem] max-w[22rem] flex items-center justify-between">
       <span className="font-poppins font-normal text-base black">{label}</span>
-      <ToggleSwitch
-        checked={isChecked}
-        onChange={() => {
-          setIsChecked(!isChecked);
-        }}
-      />
+      <ToggleSwitch />
     </div>
   );
 };
