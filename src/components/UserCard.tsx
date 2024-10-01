@@ -6,8 +6,8 @@ interface UserCardProps {
 
 export const UserCard: React.FC<UserCardProps> = ({ name, lastName, email }) => {
   return (
-    <div className="flex flex-col items-center justify-center mt-10">
-      <div className="flex flex-col items-center">
+    <div className="flex flex-col md:flex-row mx-auto items-center justify-center bg-white max-w-[342px] p-5">
+      <div className="flex flex-col items-center mb-5">
         <img
           src="https://www.w3schools.com/w3images/avatar1.png"
           alt="Avatar"
@@ -20,21 +20,6 @@ export const UserCard: React.FC<UserCardProps> = ({ name, lastName, email }) => 
           {name} {lastName}
         </h1>
         <p className="text-sm text-center">{email}</p>
-      </div>
-      <div className="ml-10 mt-4 w-full text-left pl-10 ">
-        <div className="font-[600]">Configurations</div>
-
-        <div className="ml-3">
-          <p className="bg-[#FBFBFB] font-[500]">
-            Name: <span className="font-[400]">{name}</span>
-          </p>
-          <p className="bg-[#FBFBFB] font-[500]">
-            Last Name: <span className="font-[400]">{lastName}</span>
-          </p>
-          <p className="bg-[#FBFBFB] font-[500]">
-            Email: <span className="font-[400]">{email}</span>
-          </p>
-        </div>
       </div>
     </div>
   );
