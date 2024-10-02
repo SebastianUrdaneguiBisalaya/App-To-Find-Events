@@ -12,6 +12,7 @@ export default {
       },
       colors: {
         primary: "#761CBC",
+        secondary: "#0DCDAA",
       },
     },
   },
