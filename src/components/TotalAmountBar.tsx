@@ -1,5 +1,5 @@
 import { Button } from "./Button";
-import { Texts } from "../TextTypes/Texts";
+import { Texts } from "./Texts";
 
 interface PropTotalAmountBar {
   id: string;

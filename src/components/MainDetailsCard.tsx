@@ -1,4 +1,4 @@
-import { Texts } from "./TextTypes/Texts";
+import { Texts } from "./Texts";
 
 interface MainDetailsCardProps {
   artist: string;

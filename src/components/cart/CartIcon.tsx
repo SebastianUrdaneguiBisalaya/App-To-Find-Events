@@ -10,7 +10,7 @@ export const CartIcon: React.FC<CartIconProps> = ({ itemCount }) => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        className="h-8 w-8 text-primary-color"
+        className="h-8 w-8 text-primary"
       >
         <path
           fill="currentColor"

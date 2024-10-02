@@ -19,7 +19,7 @@ export const TextInput: React.FC<TextInputProps> = ({ label, placeholder, name, 
         {label}
       </Label>
       <input
-        className="font-poppins font-normal text-base placeholder:text-base w-full px-2 py-1 border-b outline-none focus:ring-0 focus:border-primary-color"
+        className="font-poppins font-normal text-base placeholder:text-base w-full px-2 py-1 border-b outline-none focus:ring-0 focus:border-primary"
         type={type}
         id={name}
         name={name}

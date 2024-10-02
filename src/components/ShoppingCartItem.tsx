@@ -1,4 +1,5 @@
-import { Texts } from "./TextTypes/Texts";
+import { Texts } from "./Texts";
+
 interface ShoppingCartItemProps {
   title: string;
   price: string;

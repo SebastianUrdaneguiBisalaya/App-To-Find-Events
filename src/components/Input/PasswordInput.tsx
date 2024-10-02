@@ -21,7 +21,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({ label, placeholder
       </Label>
       <div className="relative">
         <input
-          className="font-poppins font-normal text-base placeholder:text-base w-full px-2 py-1 border-b outline-none focus:ring-0 focus:border-primary-color"
+          className="font-poppins font-normal text-base placeholder:text-base w-full px-2 py-1 border-b outline-none focus:ring-0 focus:border-primary"
           type={showPassword ? "text" : "password"}
           id={name}
           name={name}
