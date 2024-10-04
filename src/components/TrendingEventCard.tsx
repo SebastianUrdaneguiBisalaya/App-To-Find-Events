@@ -17,19 +17,19 @@ export const TrendingEventCard: React.FC<TrendingEventCardProps> = ({
 }) => {
   return (
     <div
-      className="max-h-[186px] max-w-[339px] inset-0 flex items-center justify-center p-4 bg-cover bg-center rounded-lg"
-      style={{ backgroundImage: `url(${imageUrl})` }}
+      className="relative min-w-[200px] min-h-[200px] sm:min-w-[310px] flex items-center justify-center p-4 bg-cover bg-center rounded-lg"
+      style={{ backgroundImage: `url("${imageUrl}")` }}
       aria-label="Event Card"
     >
-      <div className="bg-[#2D264B80] bg-opacity-50 p-4 rounded-lg w-[332px] mt-20 mb-2">
+      <div className="bg-[#2D264B80] absolute bottom-0 bg-opacity-50 mx-4 p-4 mb-2 rounded-lg w-[calc(100%-2rem)]">
         <div className="flex justify-between">
-          <div>
+          <div className="w-[70%]">
             <p className="font-semibold text-base text-white">
-              {artist} <span>{eventTitle}</span>
+              {artist}: <span>{eventTitle}</span>
             </p>
-            <p className="flex flex-row items-center font-normal text-sm text-white">
+            <div className="flex flex-row items-center font-normal text-sm text-white">
               <svg
-                className="mr-1"
+                className="mr-1 shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
                 width="12"
                 height="12"
@@ -40,11 +40,11 @@ export const TrendingEventCard: React.FC<TrendingEventCardProps> = ({
                   d="M12 3a7 7 0 0 0-7 7c0 2.862 1.782 5.623 3.738 7.762A26 26 0 0 0 12 20.758q.262-.201.615-.49a26 26 0 0 0 2.647-2.504C17.218 15.623 19 12.863 19 10a7 7 0 0 0-7-7m0 20.214l-.567-.39l-.003-.002l-.006-.005l-.02-.014l-.075-.053l-.27-.197a28 28 0 0 1-3.797-3.44C5.218 16.875 3 13.636 3 9.999a9 9 0 0 1 18 0c0 3.637-2.218 6.877-4.262 9.112a28 28 0 0 1-3.796 3.44a17 17 0 0 1-.345.251l-.021.014l-.006.005l-.002.001zM12 8a2 2 0 1 0 0 4a2 2 0 0 0 0-4m-4 2a4 4 0 1 1 8 0a4 4 0 0 1-8 0"
                 />
               </svg>
-              {location}
-            </p>
-            <p className="flex flex-row items-center font-normal text-sm text-white">
+              <p className="truncate">{location}</p>
+            </div>
+            <div className="flex flex-row items-center font-normal text-sm text-white truncate">
               <svg
-                className="mr-1"
+                className="mr-1 shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
                 width="12"
                 height="12"
@@ -57,10 +57,10 @@ export const TrendingEventCard: React.FC<TrendingEventCardProps> = ({
                   clip-rule="evenodd"
                 />
               </svg>
-              {date}
-            </p>
+              <p className="truncate">{date}</p>
+            </div>
           </div>
-          <div className="flex flex-col items-center justify-center ml-4">
+          <div className="w-[30%] flex flex-col items-center justify-center ml-4 break-words">
             <p className="font-normal text-white text-center text-[10px]">Entradas desde</p>
             <p className="font-semibold text-base text-white text-center">{price}</p>
           </div>
