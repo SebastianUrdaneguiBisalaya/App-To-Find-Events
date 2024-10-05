@@ -1,17 +1,19 @@
 import { Texts } from "./Texts";
 
 interface ShoppingCartItemProps {
-  title: string;
+  title?: string;
+  tickettype: string;
   price: string;
   taxes: string;
   details: string;
 }
 
-export const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({ title, price, taxes, details }) => {
+export const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({ title, tickettype, price, taxes, details }) => {
   return (
     <div className="flex justify-between items-center m-3 max-w-[342px]">
-      <div>
-        <h4 className="font-[700] font-poppins">{title}</h4>
+      <div className="max-w-[280px]">
+        <h4 className="font-[700] text-[#761CBC] font-poppins truncate">{title}</h4>
+        <h6 className="font-medium text-sm font-poppins truncate">{tickettype}</h6>
         <div className="flex items-center mb-[-8px]">
           <Texts
             text={price}
@@ -19,9 +21,9 @@ export const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({ title, price
             color="black"
             className="mr-2"
           />
-          <small className="text-xs text-[#7C7C7C] font-[300] font-poppins"> {taxes}</small>
+          <small className="text-xs text-[#7C7C7C] font-[300] font-poppins truncate"> {taxes}</small>
         </div>
-        <small className="text-xs text-[#7C7C7C] font-[300] font-poppins">{details}</small>
+        <small className="text-xs text-[#7C7C7C] font-[300] font-poppins truncate">{details}</small>
       </div>
       <div>
         <select
