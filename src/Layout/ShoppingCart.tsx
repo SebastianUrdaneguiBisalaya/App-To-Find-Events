@@ -41,7 +41,7 @@ export const ShoppingCart: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-4 md:p-6 lg:p-8">
+    <div className="flex flex-col items-center p-4 md:p-6 lg:p-8 min-w-[342px]">
       <div className="flex flex-col items-center w-full max-w-md">
         {cartItems.map((item, index) => (
           <div
@@ -59,7 +59,7 @@ export const ShoppingCart: React.FC = () => {
           </div>
         ))}
       </div>
-      <div className="w-full max-w-96">
+      <div className="w-full max-w-96 min-w-[342px]">
         <TotalAmountBar
           dataTotalBuy={cartItems.map((item, index) => ({
             id: item.title,
