@@ -2,8 +2,8 @@ import { ShoppingCart } from "../Layout/ShoppingCart";
 
 export const BuyTickets = () => {
   return (
-    <div className="md:h-screen flex items-center justify-center">
-      <div className="flex flex-col items-center justify-between bg-white md:w-[700px] md:shadow-md rounded-[20px]">
+    <div className="md:h-screen w-full flex items-center justify-center">
+      <div className="flex flex-col items-center justify-between bg-white w-full md:w-[700px] md:shadow-md rounded-[20px]">
         <div className="flex justify-between items-center w-full p-4 md:hidden transition-opacity duration-500 opacity-100 fade-out">
           <button className="m-4 shadow-md">
             <svg
@@ -35,6 +35,7 @@ export const BuyTickets = () => {
             />
           </svg>
         </div>
+        <div className="font-medium font-poppins text-3xl text-[#761CBC]">Carrito de compras</div>
         <ShoppingCart />
       </div>
     </div>
