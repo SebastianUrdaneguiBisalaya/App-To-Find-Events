@@ -1,4 +1,4 @@
-import { ShoppingCartItem, TotalAmountBar, Texts } from "../components";
+import { ShoppingCartItem, TotalAmountBar } from "../components";
 import { useQuantity } from "../hooks/useQuantity";
 
 interface CartItem {
@@ -42,16 +42,11 @@ export const ShoppingCart: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center p-4 md:p-6 lg:p-8">
-      <Texts
-        text="Tu carrito de compras"
-        type="subtitle"
-        color="#761CBC"
-      />
       <div className="flex flex-col items-center w-full max-w-md">
         {cartItems.map((item, index) => (
           <div
             key={index}
-            className="w-full mb-4"
+            className="w-full mb-4 flex justify-center"
             onChange={handleSelectChange(index)}
           >
             <ShoppingCartItem
@@ -64,7 +59,7 @@ export const ShoppingCart: React.FC = () => {
           </div>
         ))}
       </div>
-      <div className="w-full max-w-lg">
+      <div className="w-full max-w-96">
         <TotalAmountBar
           dataTotalBuy={cartItems.map((item, index) => ({
             id: item.title,
