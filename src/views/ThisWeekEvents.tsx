@@ -1,7 +1,7 @@
 import { TrendingEventCard } from "../components/TrendingEventCard";
 import { InputSearch, CategoryTags } from "../components";
 
-export const TrendingEvents = () => {
+export const ThisWeekEvents = () => {
   return (
     <div className="font-poppins max-w-[1500px] mx-auto my-0 px-10 pt-5">
       <div className="flex flex-col lg:flex-row lg:justify-center lg:items-center gap-4">
@@ -21,7 +21,7 @@ export const TrendingEvents = () => {
         </div>
       </div>
       <div>
-        <h3 className="font-poppins font-bold text-xl mt-5">Tendencia</h3>
+        <h3 className="font-poppins font-bold text-xl mt-5">Esta semana</h3>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
         {/* Here, we will show the trending events through the tags category with map. */}
