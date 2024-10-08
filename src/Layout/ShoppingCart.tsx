@@ -41,7 +41,7 @@ export const ShoppingCart: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-4 md:p-6 lg:p-8 min-w-[342px]">
+    <div className="flex flex-col items-center p-4 md:p-6 lg:p-8 min-w-[300px]">
       <div className="flex flex-col items-center w-full max-w-md">
         {cartItems.map((item, index) => (
           <div
