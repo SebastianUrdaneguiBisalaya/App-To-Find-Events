@@ -1,9 +1,9 @@
-const categoryColors: Record<string, string> = {
-  Concierto: "bg-blue-100",
-  Fiesta: "bg-green-100",
-  Teatro: "bg-red-100",
-  Ballet: "bg-purple-100",
-  Otros: "bg-yellow-100",
+const categoryColors: Record<string, { normal: string; hover: string }> = {
+  Concierto: { normal: "bg-blue-100", hover: "bg-blue-300" },
+  Fiesta: { normal: "bg-green-100", hover: "bg-green-300" },
+  Teatro: { normal: "bg-red-100", hover: "bg-red-300" },
+  Ballet: { normal: "bg-purple-100", hover: "bg-purple-300" },
+  Otros: { normal: "bg-yellow-100", hover: "bg-yellow-300" },
 };
 
 interface CategoryTagsProps {
@@ -11,10 +11,14 @@ interface CategoryTagsProps {
 }
 
 export const CategoryTags: React.FC<CategoryTagsProps> = ({ category }) => {
-  const bgColor = categoryColors[category] || "bg-gray-300";
+  const { normal, hover } = categoryColors[category] || { normal: "bg-gray-300", hover: "bg-gray-300" };
 
   return (
-    <span className={`inline-block mx-1 px-3 py-1 rounded-lg font-poppins font-normal text-xs ${bgColor}`}>
+    <span
+      className={`inline-block mx-1 px-3 py-1 rounded-lg font-poppins font-normal text-sm cursor-pointer ${normal}`}
+      onMouseEnter={(e) => e.currentTarget.classList.replace(normal, hover)}
+      onMouseLeave={(e) => e.currentTarget.classList.replace(hover, normal)}
+    >
       {category}
     </span>
   );
