@@ -1,7 +1,7 @@
-import { TrendingEventCard } from "../components/TrendingEventCard";
+import { UpcomingEventCard } from "../components";
 import { InputSearch, CategoryTags } from "../components";
 
-export const TrendingEvents = () => {
+export const UpcomingEvents = () => {
   return (
     <div className="font-poppins max-w-[1500px] mx-auto my-0 px-10 pt-5">
       <div className="flex flex-col lg:flex-row lg:justify-center lg:items-center gap-4">
@@ -21,17 +21,19 @@ export const TrendingEvents = () => {
         </div>
       </div>
       <div>
-        <h3 className="font-poppins font-bold text-xl mt-5">Tendencia</h3>
+        <h3 className="font-poppins font-bold text-xl mt-5">Próximos</h3>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
         {/* Here, we will show the trending events through the tags category with map. */}
-        <TrendingEventCard
-          imageUrl="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx281320.jpg"
-          eventTitle="24K Magic"
-          artist="Bruno Mars"
-          location="Buenos Aires, Argentina"
-          date="2025-02-01"
-          price="100$"
+        <UpcomingEventCard
+          data={{
+            id: 1,
+            image: "https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx281320.jpg",
+            title: "Bruno Mars - 24K Magic",
+            location: "Buenos Aires, Argentina",
+            date: "2025-02-01",
+            price: "100$",
+          }}
         />
       </div>
     </div>
