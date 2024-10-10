@@ -1,4 +1,4 @@
-import { PurchaseHistoryCard } from "./components";
+import { PurchaseHistoryCard } from "../components";
 
 export const ListTicketHistory = () => {
   return (
