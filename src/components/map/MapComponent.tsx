@@ -33,20 +33,15 @@ const CustomMarkerIcon = () => {
 interface MapComponentProps {
   market: string;
   position: [number, number];
-  size?: { height?: string; width?: string };
+  classname?: string;
 }
 
-export const MapComponent: React.FC<MapComponentProps> = ({
-  position,
-  size = { height: "100%", width: "100%" },
-  market,
-}) => {
+export const MapComponent: React.FC<MapComponentProps> = ({ position, market, classname }) => {
   return (
     <MapContainer
       center={position}
       zoom={13}
-      style={{ height: size.height, width: size.width, minHeight: "350px", minWidth: "350px" }}
-      className="rounded-lg shadow-lg"
+      className={`rounded-lg shadow-lg min-h-[250px] min-w-[250px] ${classname}`}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
