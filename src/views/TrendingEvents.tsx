@@ -24,7 +24,6 @@ export const TrendingEvents = () => {
         <h3 className="font-poppins font-bold text-xl mt-5">Tendencia</h3>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-        {/* Here, we will show the trending events through the tags category with map. */}
         <TrendingEventCard
           imageUrl="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx281320.jpg"
           eventTitle="24K Magic"

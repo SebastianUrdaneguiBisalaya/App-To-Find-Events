@@ -24,7 +24,6 @@ export const UpcomingEvents = () => {
         <h3 className="font-poppins font-bold text-xl mt-5">Próximos</h3>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-        {/* Here, we will show the trending events through the tags category with map. */}
         <UpcomingEventCard
           data={{
             id: 1,
