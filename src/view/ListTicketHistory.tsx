@@ -10,7 +10,6 @@ export const ListTicketHistory = () => {
         </h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-        {/* Here, we will show the trending events history through the component item history with map. */}
         <PurchaseHistoryCard
           dateBuy="2024-12-20"
           nameEvent="Bruno Mars | Stars 25"
