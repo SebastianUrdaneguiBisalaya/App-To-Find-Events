@@ -19,7 +19,6 @@ type TicketCardProps = {
 type TicketsArray = {
   tickets: TicketCardProps[];
 };
-
 export const Tickets = ({ tickets }: TicketsArray) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   console.log(currentIndex);
