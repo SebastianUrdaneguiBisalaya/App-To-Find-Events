@@ -14,7 +14,7 @@ interface UpcomingEventCardProps {
 export const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({ data }) => {
   const { image, title, location, date, price } = data;
   return (
-    <div className="bg-white w-[11rem] md:w-[14rem] rounded-xl shadow-xl border-1 p-3">
+    <div className="bg-white min-w-[11rem] md:min-w-[14rem] rounded-xl shadow-xl border-1 p-3">
       <img
         src={image}
         alt={title}
