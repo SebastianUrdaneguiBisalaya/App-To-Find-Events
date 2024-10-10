@@ -6,6 +6,7 @@ export const NavBar: React.FC = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div className="relative">
       <button
@@ -14,79 +15,77 @@ export const NavBar: React.FC = () => {
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="40"
-          height="40"
+          width="30"
+          height="30"
           viewBox="0 0 32 32"
         >
           <path
             fill="none"
             stroke="#761CBC"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="M5 8h22M5 16h22M5 24h22"
           />
         </svg>
       </button>
 
-      <div className="hidden md:flex md:justify-center md:items-center md:bg-white md:shadow-lg md:mx-20 md:px-10 md:h-20 sm:rounded-full rounded-2xl">
-        <a
-          href="#"
-          className="font-bold text-3xl text-[#761CBC] mr-4"
-        >
-          ExploryQ
-        </a>
-
-        <ul className="flex space-x-6 ">
-          <li className="text-sm text-black hover:text-[#761CBC]">
-            <a href="#">Home</a>
-          </li>
-          <li className="text-sm text-black hover:text-[#761CBC]">
-            <a href="#">Eventos Esta Semana</a>
-          </li>
-          <li className="text-sm text-black hover:text-[#761CBC]">
-            <a href="#">Próximos Eventos</a>
-          </li>
-          <li className="text-sm text-black hover:text-[#761CBC]">
-            <a href="#">Historial</a>
-          </li>
-          <li className="text-sm text-black hover:text-[#761CBC]">
-            <a href="#">Perfil</a>
-          </li>
-        </ul>
-
-        <div className="relative mr-4">
-          <svg
-            className="ms-5"
-            xmlns="http://www.w3.org/2000/svg"
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
+      <div className="hidden md:flex md:justify-center md:items-center md:bg-white md:shadow-lg max-w-5xl md:mx-auto md:px-6 md:h-20 sm:rounded-full rounded-2xl">
+        <div className="md:flex m-4">
+          <a
+            href="#"
+            className="font-bold text-3xl text-[#761CBC] mr-4 font-poppins"
           >
-            <path
-              fill="#761CBC"
-              d="M17 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2M1 2v2h2l3.6 7.59l-1.36 2.45c-.15.28-.24.61-.24.96a2 2 0 0 0 2 2h12v-2H7.42a.25.25 0 0 1-.25-.25q0-.075.03-.12L8.1 13h7.45c.75 0 1.41-.42 1.75-1.03l3.58-6.47c.07-.16.12-.33.12-.5a1 1 0 0 0-1-1H5.21l-.94-2M7 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2"
-            />
+            {" "}
+            ExploryQ{" "}
+          </a>
+
+          <div className="flex-1">
+            <ul className="flex gap-8 px-10 flex-1 justify-center">
+              <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
+                <a href="#">Home</a>
+              </li>
+              <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
+                <a href="#">Eventos Esta Semana</a>
+              </li>
+              <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
+                <a href="#">Próximos Eventos</a>
+              </li>
+              <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
+                <a href="#">Historial</a>
+              </li>
+              <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
+                <a href="#">Perfil</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="relative mr-4 flex">
+          <svg
+            className="w-8 h-8 md:w-10 md:h-10"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="#761CBC"
+          >
+            <path d="M17 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2M1 2v2h2l3.6 7.59l-1.36 2.45c-.15.28-.24.61-.24.96a2 2 0 0 0 2 2h12v-2H7.42a.25.25 0 0 1-.25-.25q0-.075.03-.12L8.1 13h7.45c.75 0 1.41-.42 1.75-1.03l3.58-6.47c.07-.16.12-.33.12-.5a1 1 0 0 0-1-1H5.21l-.94-2M7 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2" />
           </svg>
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-xs px-1 ms-8">2</span>
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-xs px-1">2</span>
         </div>
       </div>
 
       <div
-        className={`fixed top-0 left-0 h-full w-96 bg-white shadow-lg transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out z-50 md:hidden`}
+        className={`fixed top-0 left-0 h-full w-72 bg-white shadow-lg transform ${isOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 ease-in-out z-50 md:hidden`}
       >
         <div className="p-4">
-          <h2 className="font-bold text-4xl p-5 mb-5 text-[#761CBC]">ExploryQ</h2>
-
+          <h2 className="font-bold text-3xl p-5 mb-5 text-[#761CBC]">ExploryQ</h2>
           <ul>
             <li className="my-4 flex items-center text-lg text-black">
               <svg
                 className="p-1"
                 xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
+                width="30"
+                height="30"
                 viewBox="0 0 14 16"
               >
                 <path
@@ -97,7 +96,7 @@ export const NavBar: React.FC = () => {
               </svg>
               <a
                 href="#"
-                className="text-black hover:text-[#761CBC]"
+                className="text-black hover:text-[#761CBC]  text-sm font-poppins"
               >
                 Eventos Esta Semana
               </a>
@@ -106,8 +105,8 @@ export const NavBar: React.FC = () => {
               <svg
                 className="p-1"
                 xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
+                width="30"
+                height="30"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -120,7 +119,7 @@ export const NavBar: React.FC = () => {
               </svg>
               <a
                 href="#"
-                className="text-black hover:text-[#761CBC]"
+                className="text-black hover:text-[#761CBC] text-sm font-poppins"
               >
                 Próximos Eventos
               </a>
@@ -129,8 +128,8 @@ export const NavBar: React.FC = () => {
               <svg
                 className="p-1"
                 xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
+                width="30"
+                height="30"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -140,7 +139,7 @@ export const NavBar: React.FC = () => {
               </svg>
               <a
                 href="#"
-                className="text-black hover:text-[#761CBC]"
+                className="text-black hover:text-[#761CBC] font-poppins"
               >
                 Historial
               </a>
@@ -149,8 +148,8 @@ export const NavBar: React.FC = () => {
               <svg
                 className="p-1"
                 xmlns="http://www.w3.org/2000/svg"
-                width="35"
-                height="35"
+                width="30"
+                height="30"
                 viewBox="0 0 1408 1472"
               >
                 <path
@@ -160,16 +159,15 @@ export const NavBar: React.FC = () => {
               </svg>
               <a
                 href="#"
-                className="text-black hover:text-[#761CBC]"
+                className="text-black hover:text-[#761CBC] text-sm font-poppins"
               >
                 Perfil
               </a>
             </li>
           </ul>
-
           <div className="flex justify-center mt-4">
             <button
-              className={`bg-[#761CBC] text-white text-lg px-8 py-4 rounded ${isOpen ? "" : "hidden"}`}
+              className={`bg-[#761CBC] text-white text-sm px-8 py-3 rounded ${isOpen ? "" : "hidden"}`}
               onClick={toggleMenu}
             >
               Regresar
