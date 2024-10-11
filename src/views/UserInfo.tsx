@@ -30,7 +30,7 @@ export const UserInfo = () => {
               </Link>
               <Button
                 text="Cerrar Sesión"
-                className="w-[250px] h-[60px]"
+                className="w-[15.625rem] h-[3.75rem]"
               />
               <button className="text-[#F00606] font-medium font-poppins text-sm">Eliminar sesión</button>
             </div>
