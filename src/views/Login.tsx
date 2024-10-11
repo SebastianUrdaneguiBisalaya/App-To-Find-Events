@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, PasswordInput, TextInput, ToggleSwitchField } from "../components";
+import { Link } from "react-router-dom";
 
 export const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -8,16 +9,16 @@ export const Login: React.FC = () => {
 
   return (
     <div className="max-w-[1500px] min-h-screen flex flex-col items-center justify-center m-auto md:gap-8 md:p-4">
-      <div className="w-full lg:w-[1000px] hidden md:block">
-        <h1 className="text-primary font-bold text-3xl">ExploreQ</h1>
-      </div>
       <div className="w-full lg:w-[1000px]">
-        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-12 items-center justify-center">
           <div>
+            <div className="w-full lg:w-[1000px] hidden md:block mb-4">
+              <h1 className="text-primary font-bold text-3xl">ExploreQ</h1>
+            </div>
             <img
               src="./src/assets/celebration.png"
               alt="Celebration illustration"
-              className="h-full w-full hidden md:block"
+              className="max-h-[26.6rem] w-full hidden md:block"
             />
           </div>
           <div className="md:flex-1 flex flex-col items-center justify-center">
@@ -56,12 +57,18 @@ export const Login: React.FC = () => {
 
               <div className="mt-4 text-center">
                 <p className="text-base font-normal">¿Aún no tienes una cuenta? </p>
-                <a
+                {/* <a
                   href="#"
                   className="text-base font-medium hover:text-primary"
                 >
                   Regístrate aquí
-                </a>
+                </a> */}
+                <Link
+                  className="text-base font-medium hover:text-primary"
+                  to={"/signup"}
+                >
+                  Regístrate aquí
+                </Link>
               </div>
             </div>
           </div>

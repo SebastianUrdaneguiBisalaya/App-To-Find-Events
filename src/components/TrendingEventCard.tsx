@@ -17,7 +17,7 @@ export const TrendingEventCard: React.FC<TrendingEventCardProps> = ({
 }) => {
   return (
     <div
-      className="relative min-w-[200px] min-h-[200px] flex items-center justify-center p-4 bg-cover bg-center rounded-lg"
+      className="relative min-w-[200px] min-h-[200px] flex items-center justify-center p-4 bg-cover bg-center rounded-lg cursor-pointer"
       style={{ backgroundImage: `url("${imageUrl}")` }}
       aria-label="Event Card"
     >

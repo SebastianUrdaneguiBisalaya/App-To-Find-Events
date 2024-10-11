@@ -5,6 +5,7 @@ type PurchaseHistoryCardProps = {
   dateEvent: string;
   placeEvent: string;
   hourEvent: string;
+  onClick: () => void;
 };
 
 export const PurchaseHistoryCard = ({
@@ -14,9 +15,13 @@ export const PurchaseHistoryCard = ({
   dateEvent,
   placeEvent,
   hourEvent,
+  onClick,
 }: PurchaseHistoryCardProps) => {
   return (
-    <button className="flex flex-col md:min-w-[15rem] h-auto shadow-xl rounded-2xl p-4 font-poppins justify-start items-start">
+    <button
+      className="flex flex-col md:min-w-[15rem] h-auto shadow-xl rounded-2xl p-4 font-poppins justify-start items-start"
+      onClick={onClick}
+    >
       <div className="w-full">
         <p className="flex justify-between items-center text-left font-bold text-xs">
           Día de compra: <span className="font-normal text-sm">{dateBuy ? dateBuy : ""}</span>

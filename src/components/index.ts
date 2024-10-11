@@ -19,3 +19,4 @@ export * from "./TotalAmountBar";
 export * from "./TrendingEventCard";
 export * from "./UserCard";
 export * from "./UserConfigurations";
+export * from "./Navbar";

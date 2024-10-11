@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,30 +31,30 @@ export const NavBar: React.FC = () => {
         </svg>
       </button>
 
-      <div className="hidden md:flex md:justify-center md:items-center md:bg-white md:shadow-lg max-w-[58rem] md:mx-auto md:px-6 md:h-20 sm:rounded-full rounded-2xl">
+      <div className="hidden md:flex md:justify-center md:items-center md:bg-white md:shadow-lg max-w-[58rem] md:px-6 md:h-[4.5rem] sm:rounded-full rounded-2xl md:mt-4 md:mx-2">
         <div className="md:flex m-4">
           <div className="flex">
-            <a
-              href="#"
+            <Link
               className="font-bold text-3xl text-primary mr-4"
+              to={"/trendingevents"}
             >
               ExploryQ
-            </a>
+            </Link>
           </div>
 
-          <div className="flex-1">
-            <ul className="flex gap-8 px-10 flex-1 justify-center">
+          <div className="flex justify-center items-center flex-1">
+            <ul className="flex gap-8 px-10 flex-1 justify-center items-center">
               <li className="text-sm text-black hover:text-primary font-poppins">
-                <a href="#">Home</a>
+                <Link to={"/trendingevents"}>Home</Link>
               </li>
               <li className="text-sm text-black hover:text-primary font-poppins">
-                <a href="#">Eventos Esta Semana</a>
+                <Link to={"/eventsthisweek"}>Eventos Esta Semana</Link>
               </li>
               <li className="text-sm text-black hover:text-primary font-poppins">
-                <a href="#">Próximos Eventos</a>
+                <Link to={"/upcomingevents"}>Próximos Eventos</Link>
               </li>
               <li className="text-sm text-black hover:text-primary font-poppins">
-                <a href="#">Historial</a>
+                <Link to={"/history"}>Historial</Link>
               </li>
               <li className="text-sm text-black hover:text-primary font-poppins">
                 <a href="#">Perfil</a>
@@ -64,7 +65,7 @@ export const NavBar: React.FC = () => {
 
         <div className="relative mr-4 flex">
           <svg
-            className="w-8 h-8 md:w-10 md:h-10"
+            className="w-8 h-8"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="#761CBC"
@@ -79,7 +80,14 @@ export const NavBar: React.FC = () => {
         className={`fixed top-0 left-0 h-full w-72 bg-white shadow-lg transform ${isOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 ease-in-out z-50 md:hidden`}
       >
         <div className="p-4">
-          <h2 className="font-bold text-3xl p-5 mb-5 text-primary">ExploryQ</h2>
+          <div className="flex justify-start items-start">
+            <Link
+              className="font-bold text-3xl text-primary pt-5 pl-1 mb-5"
+              to={"/trendingevents"}
+            >
+              ExploryQ
+            </Link>
+          </div>
           <ul>
             <li className="my-4 flex items-center text-lg text-black">
               <svg
@@ -95,12 +103,12 @@ export const NavBar: React.FC = () => {
                   fill="#761CBC"
                 />
               </svg>
-              <a
-                href="#"
+              <Link
                 className="text-black hover:text-primary  text-sm font-poppins"
+                to={"/eventsthisweek"}
               >
                 Eventos Esta Semana
-              </a>
+              </Link>
             </li>
             <li className="my-4 flex items-center text-lg text-black">
               <svg
@@ -118,12 +126,12 @@ export const NavBar: React.FC = () => {
                   d="M9 6h12M9 12h12M9 18h8M4 7a1 1 0 1 0 0-2a1 1 0 0 0 0 2Zm0 6a1 1 0 1 0 0-2a1 1 0 0 0 0 2Zm0 6a1 1 0 1 0 0-2a1 1 0 0 0 0 2Z"
                 />
               </svg>
-              <a
-                href="#"
+              <Link
                 className="text-black hover:text-primary text-sm font-poppins"
+                to={"upcomingevents"}
               >
                 Próximos Eventos
-              </a>
+              </Link>
             </li>
             <li className="my-4 flex items-center text-lg text-black">
               <svg
@@ -138,12 +146,12 @@ export const NavBar: React.FC = () => {
                   d="M8 20q-.825 0-1.412-.587T6 18v-3h3v-2.25q-.875-.05-1.662-.387T5.9 11.35v-1.1H4.75L1.5 7q.9-1.15 2.225-1.625T6.4 4.9q.675 0 1.313.1T9 5.375V4h12v13q0 1.25-.875 2.125T18 20zm3-5h6v2q0 .425.288.713T18 18t.713-.288T19 17V6h-8v.6l6 6V14h-1.4l-2.85-2.85l-.2.2q-.35.35-.737.625T11 12.4zM5.6 8.25h2.3v2.15q.3.2.625.275t.675.075q.575 0 1.038-.175t.912-.625l.2-.2l-1.4-1.4q-.725-.725-1.625-1.088T6.4 6.9q-.5 0-.95.075t-.9.225z"
                 />
               </svg>
-              <a
-                href="#"
+              <Link
                 className="text-black hover:text-primary text-sm font-poppins"
+                to={"/history"}
               >
                 Historial
-              </a>
+              </Link>
             </li>
             <li className="my-4 flex items-center text-lg text-black">
               <svg

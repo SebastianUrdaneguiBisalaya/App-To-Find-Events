@@ -24,7 +24,7 @@ export const TicketCard = ({
   barcode,
 }: TicketCardProps) => {
   return (
-    <div className="max-w-[22rem] font-poppins rounded-2xl shadow-xl">
+    <div className="max-w-[22rem] h-full font-poppins rounded-2xl shadow-xl bg-white">
       <div className="p-4">
         <img
           className="w-full rounded-xl h-[10rem] object-cover"
