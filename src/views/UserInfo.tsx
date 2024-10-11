@@ -1,4 +1,5 @@
 import { Button, UserCard, UserConfigurations } from "../components";
+import { Link } from "react-router-dom";
 
 export const UserInfo = () => {
   return (
@@ -20,13 +21,18 @@ export const UserInfo = () => {
               email="email@gmail.com"
             />
             <div className="flex flex-col items-center justify-center space-y-6">
-              <button className="font-medium">Guardar Cambios</button>
-              <button className="font-medium">Ir al Home</button>
+              <button className="font-medium hover:text-primary font-poppins text-sm">Guardar Cambios</button>
+              <Link
+                className="font-medium hover:text-primary font-poppins text-sm"
+                to={"/trendingEvents"}
+              >
+                Ir al Home
+              </Link>
               <Button
                 text="Cerrar Sesión"
-                className="w-[342px] h-[60px]"
+                className="w-[250px] h-[60px]"
               />
-              <button className="text-[#F00606] font-medium">Eliminar sesión</button>
+              <button className="text-[#F00606] font-medium font-poppins text-sm">Eliminar sesión</button>
             </div>
           </div>
         </div>

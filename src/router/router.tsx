@@ -1,6 +1,6 @@
 import App from "../App";
 import { createBrowserRouter } from "react-router-dom";
-import { Login, SignUp, TrendingEvents, ThisWeekEvents, UpcomingEvents, ListTicketHistory } from "../views";
+import { Login, SignUp, TrendingEvents, ThisWeekEvents, UpcomingEvents, ListTicketHistory, UserInfo } from "../views";
 
 export const router = createBrowserRouter([
   {
@@ -32,5 +32,9 @@ export const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/userinfo",
+    element: <UserInfo />,
   },
 ]);
