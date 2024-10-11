@@ -32,30 +32,34 @@ export const NavBar: React.FC = () => {
 
       <div className="hidden md:flex md:justify-center md:items-center md:bg-white md:shadow-lg max-w-[58rem] md:mx-auto md:px-6 md:h-20 sm:rounded-full rounded-2xl">
         <div className="md:flex m-4">
-            <div className="flex">
-              <a href="#"
-                className="font-bold text-3xl text-[#761CBC] mr-4 font-poppins"> ExploryQ </a>
-            </div>
-            
-            <div className="flex-1">
-              <ul className="flex gap-8 px-10 flex-1 justify-center">
-                <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
-                  <a href="#">Home</a>
-                </li>
-                <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
-                  <a href="#">Eventos Esta Semana</a>
-                </li>
-                <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
-                  <a href="#">Próximos Eventos</a>
-                </li>
-                <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
-                  <a href="#">Historial</a>
-                </li>
-                <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
-                  <a href="#">Perfil</a>
-                </li>
-              </ul>
-            </div>
+          <div className="flex">
+            <a
+              href="#"
+              className="font-bold text-3xl text-[#761CBC] mr-4"
+            >
+              ExploryQ
+            </a>
+          </div>
+
+          <div className="flex-1">
+            <ul className="flex gap-8 px-10 flex-1 justify-center">
+              <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
+                <a href="#">Home</a>
+              </li>
+              <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
+                <a href="#">Eventos Esta Semana</a>
+              </li>
+              <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
+                <a href="#">Próximos Eventos</a>
+              </li>
+              <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
+                <a href="#">Historial</a>
+              </li>
+              <li className="text-sm text-black hover:text-[#761CBC] font-poppins">
+                <a href="#">Perfil</a>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="relative mr-4 flex">
@@ -136,7 +140,7 @@ export const NavBar: React.FC = () => {
               </svg>
               <a
                 href="#"
-                className="text-black hover:text-[#761CBC] font-poppins"
+                className="text-black hover:text-[#761CBC] text-sm font-poppins"
               >
                 Historial
               </a>
