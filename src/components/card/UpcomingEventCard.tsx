@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export interface UpcomingEvent {
   id: number;
   image: string;
@@ -14,7 +16,10 @@ interface UpcomingEventCardProps {
 export const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({ data }) => {
   const { image, title, location, date, price } = data;
   return (
-    <div className="bg-white w-[11rem] md:w-[14rem] rounded-xl shadow-xl border-1 p-3">
+    <Link
+      className="bg-white w-[11rem] md:w-[14rem] rounded-xl shadow-xl border-1 p-3"
+      to={`/eventdescription/${data.id}`}
+    >
       <img
         src={image}
         alt={title}
@@ -69,6 +74,6 @@ export const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({ data }) =>
           <p className="w-[90%]">{price}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };

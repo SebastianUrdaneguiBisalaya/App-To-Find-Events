@@ -7,7 +7,8 @@ export const UpcomingEvents = () => {
       <div className="flex flex-col lg:flex-row lg:justify-center lg:items-center gap-4">
         <h2 className="text-3xl font-bold items-center justify-center">
           Encontrar
-          <h2 className="text-primary">Eventos en Tendencia</h2>
+          <br />
+          <span className="text-primary">Eventos en Tendencia</span>
         </h2>
         <div className="flex-1 flex-col items-center justify-end w-full">
           <InputSearch />

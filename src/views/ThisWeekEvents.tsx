@@ -7,7 +7,8 @@ export const ThisWeekEvents = () => {
       <div className="flex flex-col lg:flex-row lg:justify-center lg:items-center gap-4">
         <h2 className="text-3xl font-bold items-center justify-center">
           Encontrar
-          <h2 className="text-primary">Eventos en Tendencia</h2>
+          <br />
+          <span className="text-primary">Eventos en Tendencia</span>
         </h2>
         <div className="flex-1 flex-col items-center justify-end w-full">
           <InputSearch />
@@ -25,6 +26,7 @@ export const ThisWeekEvents = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
         <TrendingEventCard
+          id="1"
           imageUrl="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx281320.jpg"
           eventTitle="24K Magic"
           artist="Bruno Mars"
