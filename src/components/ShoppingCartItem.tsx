@@ -20,7 +20,7 @@ export const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
   return (
     <div className="flex justify-between items-center m-3 max-w-[342px]">
       <div className="max-w-[280px]">
-        <h4 className="font-[700] text-[#761CBC] font-poppins truncate">{title}</h4>
+        <h4 className="font-[700] text-primary font-poppins truncate">{title}</h4>
         <h6 className="font-medium text-sm font-poppins truncate">{tickettype}</h6>
         <div className="flex items-center mb-[-8px]">
           <Texts
