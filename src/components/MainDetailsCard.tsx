@@ -57,7 +57,7 @@ export const MainDetailsCard: React.FC<MainDetailsCardProps> = ({ artist, eventT
             className="font-normal text-sm"
           />
         </div>
-        <p className="font-medium text-sm">{capacity} + participants </p>
+        <p className="font-medium text-sm">{capacity}</p>
       </div>
     </div>
   );

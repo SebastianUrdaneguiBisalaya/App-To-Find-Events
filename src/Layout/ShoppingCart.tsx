@@ -47,7 +47,6 @@ export const ShoppingCart: React.FC = () => {
           <div
             key={index}
             className="w-full flex justify-center"
-            onChange={handleSelectChange(index)}
           >
             <ShoppingCartItem
               title={item.title}
@@ -55,13 +54,14 @@ export const ShoppingCart: React.FC = () => {
               price={item.price}
               taxes={item.taxes}
               details={item.details}
+              onChange={handleSelectChange(index)}
             />
           </div>
         ))}
       </div>
       <div className="w-full max-w-96 min-w-[342px]">
         <TotalAmountBar
-          dataTotalBuy={cartItems.map((item, index) => ({
+          dataTotalBuy={cartItems?.map((item, index) => ({
             id: item.title,
             product: item.title,
             price: (parseFloat(item.price) * quantities[index]).toFixed(2),

@@ -1,6 +1,15 @@
 import App from "../App";
 import { createBrowserRouter } from "react-router-dom";
-import { Login, SignUp, TrendingEvents, ThisWeekEvents, UpcomingEvents, ListTicketHistory, UserInfo } from "../views";
+import {
+  Login,
+  SignUp,
+  TrendingEvents,
+  ThisWeekEvents,
+  UpcomingEvents,
+  ListTicketHistory,
+  UserInfo,
+  CardDescription,
+} from "../views";
 
 export const router = createBrowserRouter([
   {
@@ -36,5 +45,9 @@ export const router = createBrowserRouter([
   {
     path: "/userinfo",
     element: <UserInfo />,
+  },
+  {
+    path: "/eventdescription/:id",
+    element: <CardDescription />,
   },
 ]);

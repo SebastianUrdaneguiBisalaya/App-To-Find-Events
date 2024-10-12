@@ -6,9 +6,17 @@ interface ShoppingCartItemProps {
   price: string;
   taxes: string;
   details: string;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({ title, tickettype, price, taxes, details }) => {
+export const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
+  title,
+  tickettype,
+  price,
+  taxes,
+  details,
+  onChange,
+}) => {
   return (
     <div className="flex justify-between items-center m-3 max-w-[342px]">
       <div className="max-w-[280px]">
@@ -29,6 +37,7 @@ export const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({ title, ticke
         <select
           className="border border-[#7C7C7C] rounded-md"
           name="quantity"
+          onChange={onChange}
         >
           {[...Array(11)].map((_, index) => (
             <option
