@@ -1,10 +1,26 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, TextInput } from "../components";
-import { Link } from "react-router-dom";
+import { useAuthStore } from "../store/AuthStore";
+import { SignUpFormFields, SignUpSchema } from "../schema/SignUp.schema";
 
 export const SignUp: React.FC = () => {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const navigate = useNavigate();
+  const { signUp, error: signUpError } = useAuthStore((state) => state);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpFormFields>({
+    resolver: zodResolver(SignUpSchema),
+  });
+
+  const onSubmit: SubmitHandler<SignUpFormFields> = async (data) => {
+    await signUp(data);
+    console.log("SignUp successful");
+    navigate("/");
   };
 
   return (
@@ -24,37 +40,43 @@ export const SignUp: React.FC = () => {
           <div className="flex flex-col items-center justify-center">
             <h2 className="black font-bold text-3xl md:text-center text-left mb-4">Crear Cuenta</h2>
             <form
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-6 md:gap-4"
             >
               <TextInput
                 label="Apellidos"
                 placeholder="Ingresa los apellidos completos"
                 type="text"
-                name="LastName"
+                {...register("lastName")}
+                error={errors.lastName?.message}
               />
               <TextInput
                 label="Nombres"
                 placeholder="Ingresa los nombres completos"
                 type="text"
-                name="First Name"
+                {...register("firstName")}
+                error={errors.firstName?.message}
               />
               <TextInput
                 label="Correo Electrónico"
                 placeholder="name@example.com"
                 type="email"
-                name="email"
+                {...register("email")}
+                error={errors.email?.message}
               />
               <TextInput
                 label="Crear Contraseña"
-                name="password"
                 placeholder="Ingresa tu contraseña"
+                {...register("password")}
+                error={errors.password?.message}
               />
               <TextInput
                 label="Repetir Contraseña"
-                name="confirmPassword"
                 placeholder="Confirmar contraseña"
+                {...register("confirmPassword")}
+                error={errors.confirmPassword?.message}
               />
+              {signUpError && <span className="text-red-500 text-sm text-center">{signUpError}</span>}
               <Button
                 text="Regístrate"
                 type="submit"
@@ -62,12 +84,6 @@ export const SignUp: React.FC = () => {
               />
             </form>
             <div className="mt-2 text-center">
-              {/* <a
-                href="#"
-                className="text-base font-medium hover:text-primary"
-              >
-                Iniciar Sesion
-              </a> */}
               <Link
                 className="text-base font-medium hover:text-primary"
                 to={"/login"}

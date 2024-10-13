@@ -10,6 +10,7 @@ import {
   UserInfo,
   CardDescription,
 } from "../views";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -30,7 +31,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/history",
-        element: <ListTicketHistory />,
+        element: (
+          <ProtectedRoute>
+            <ListTicketHistory />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
@@ -44,7 +49,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/userinfo",
-    element: <UserInfo />,
+    element: (
+      <ProtectedRoute>
+        <UserInfo />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/eventdescription/:id",

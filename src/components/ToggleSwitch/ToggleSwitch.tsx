@@ -1,21 +1,22 @@
-import { useState } from "react";
+import React from "react";
 
-export const ToggleSwitch = () => {
-  const [isChecked, setIsChecked] = useState(false);
+interface ToggleSwitchProps {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}
 
+export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ checked, onChange }) => {
   return (
-    <label className=" relative inline-flex items-center cursor-pointer">
+    <label className="relative inline-flex items-center cursor-pointer">
       <input
         type="checkbox"
         className="sr-only"
-        checked={isChecked}
-        onChange={() => {
-          setIsChecked(!isChecked);
-        }}
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
       />
-      <div className={`block w-10 h-6 rounded-full ${isChecked ? "bg-secondary" : "bg-gray-300"}`}></div>
+      <div className={`block w-10 h-6 rounded-full ${checked ? "bg-secondary" : "bg-gray-300"}`}></div>
       <div
-        className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition ${isChecked ? "transform translate-x-4" : ""}`}
+        className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition ${checked ? "transform translate-x-4" : ""}`}
       ></div>
     </label>
   );
