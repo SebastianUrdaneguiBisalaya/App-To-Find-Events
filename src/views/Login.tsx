@@ -1,10 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, PasswordInput, TextInput, ToggleSwitchField } from "../components";
-import { Link } from "react-router-dom";
+import { useAuthStore } from "../store/AuthStore";
+import { LoginFormFields, LoginSchema } from "../schema/Login.schema";
 
 export const Login: React.FC = () => {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const navigate = useNavigate();
+  const { login, getRememberedEmail, setRememberedEmail, error: loginError } = useAuthStore((state) => state);
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm<LoginFormFields>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      rememberMe: false,
+    },
+  });
+
+  useEffect(() => {
+    const rememberedEmail = getRememberedEmail();
+    if (rememberedEmail) {
+      setValue("email", rememberedEmail);
+      setValue("rememberMe", true);
+    }
+  }, [setValue]);
+
+  const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
+    await login({ email: data.email, password: data.password });
+    if (data.rememberMe) {
+      setRememberedEmail(data.email);
+    } else {
+      setRememberedEmail(null);
+    }
+    console.log("Login successful");
+    navigate("/trendingevents");
   };
 
   return (
@@ -33,21 +67,28 @@ export const Login: React.FC = () => {
                 className=" mi-w-[15rem] min-h-[14rem] w-[15rem] h-[14rem] sm:w-[20rem] sm:h-[18rem] md:hidden"
               />
               <form
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col gap-8 md:gap-6"
               >
                 <TextInput
                   label="Correo Electrónico"
                   placeholder="name@example.com"
                   type="email"
-                  name="email"
+                  {...register("email")}
+                  error={errors.email?.message}
                 />
                 <PasswordInput
                   label="Contraseña"
-                  name="password"
                   placeholder="Ingresa tu contraseña"
+                  {...register("password")}
+                  error={errors.password?.message}
                 />
-                <ToggleSwitchField label="Recuérdame" />
+                <ToggleSwitchField
+                  label="Recuérdame"
+                  name="rememberMe"
+                  control={control}
+                />
+                {loginError && <span className="text-red-500 text-sm text-center">{loginError}</span>}
                 <Button
                   text="Iniciar sesión"
                   type="submit"
@@ -57,12 +98,6 @@ export const Login: React.FC = () => {
 
               <div className="mt-4 text-center">
                 <p className="text-base font-normal">¿Aún no tienes una cuenta? </p>
-                {/* <a
-                  href="#"
-                  className="text-base font-medium hover:text-primary"
-                >
-                  Regístrate aquí
-                </a> */}
                 <Link
                   className="text-base font-medium hover:text-primary"
                   to={"/signup"}
