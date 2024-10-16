@@ -11,12 +11,17 @@ import {
   CardDescription,
 } from "../views";
 import ProtectedRoute from "./ProtectedRoute";
+import { Navigate } from "react-router-dom";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "/",
+        element: <Navigate to="/trendingevents" />,
+      },
       {
         path: "/trendingevents",
         element: <TrendingEvents />,

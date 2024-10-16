@@ -41,7 +41,7 @@ export const NavBar: React.FC = () => {
         </div>
       </div>
 
-      <div className="hidden md:flex md:justify-center md:items-center md:bg-white md:shadow-lg max-w-[58rem] md:px-6 md:h-[4.5rem] sm:rounded-full rounded-2xl md:mt-4 md:mx-2">
+      <div className="hidden md:flex md:justify-center md:items-center md:bg-white md:shadow-lg max-w-[64rem] md:px-6 md:h-[4.5rem] sm:rounded-full rounded-2xl md:mt-4 md:mx-2">
         <div className="md:flex m-4">
           <div className="flex">
             <Link
@@ -57,31 +57,37 @@ export const NavBar: React.FC = () => {
               <li className="text-sm text-black hover:text-primary font-poppins">
                 <Link to={"/trendingevents"}>Home</Link>
               </li>
-              <li className="text-sm text-black hover:text-primary font-poppins">
+              <li className="text-sm text-black hover:text-primary font-poppins text-center">
                 <Link to={"/eventsthisweek"}>Eventos Esta Semana</Link>
               </li>
-              <li className="text-sm text-black hover:text-primary font-poppins">
+              <li className="text-sm text-black hover:text-primary font-poppins text-center">
                 <Link to={"/upcomingevents"}>Próximos Eventos</Link>
               </li>
-              <li className="text-sm text-black hover:text-primary font-poppins">
+              <li className="text-sm text-black hover:text-primary font-poppins text-center">
                 <Link to={"/history"}>Historial</Link>
               </li>
-              <li className="text-sm text-black hover:text-primary font-poppins">
+              <li className="text-sm text-black hover:text-primary font-poppins text-center">
                 <Link to={"/userinfo"}>Perfil</Link>
+              </li>
+              <li className="flex flex-row justify-center items-center">
+                <Link
+                  className="text-sm text-black hover:text-primary font-poppins text-center"
+                  to={"/login"}
+                >
+                  Login/
+                </Link>
+                <Link
+                  className="text-sm text-black hover:text-primary font-poppins text-center"
+                  to={"/signup"}
+                >
+                  Sign Up
+                </Link>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="relative mr-4 flex">
-          {/* <svg
-            className="w-8 h-8"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="#761CBC"
-          >
-            <path d="M17 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2M1 2v2h2l3.6 7.59l-1.36 2.45c-.15.28-.24.61-.24.96a2 2 0 0 0 2 2h12v-2H7.42a.25.25 0 0 1-.25-.25q0-.075.03-.12L8.1 13h7.45c.75 0 1.41-.42 1.75-1.03l3.58-6.47c.07-.16.12-.33.12-.5a1 1 0 0 0-1-1H5.21l-.94-2M7 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2" />
-          </svg> */}
           <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-xs px-1">2</span>
           <BuyTickets />
         </div>
@@ -183,6 +189,33 @@ export const NavBar: React.FC = () => {
               >
                 Perfil
               </Link>
+            </li>
+            <li className="my-4 flex items-center text-lg text-black">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#761CBC"
+                  d="M12 21v-2h7V5h-7V3h7q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21zm-2-4l-1.375-1.45l2.55-2.55H3v-2h8.175l-2.55-2.55L10 7l5 5z"
+                />
+              </svg>
+              <div className="flex flex-row">
+                <Link
+                  className="text-black hover:text-primary text-sm font-poppins"
+                  to={"/login"}
+                >
+                  Login/
+                </Link>
+                <Link
+                  className="text-black hover:text-primary text-sm font-poppins"
+                  to={"/signup"}
+                >
+                  Sign Up
+                </Link>
+              </div>
             </li>
           </ul>
           <div className="flex justify-center mt-4">
