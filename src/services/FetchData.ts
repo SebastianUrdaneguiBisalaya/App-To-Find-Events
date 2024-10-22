@@ -4,7 +4,6 @@ type FetchData = {
 };
 
 export const fetchData = async ({ baseUrl, signal }: FetchData) => {
-  console.log(baseUrl, "Base url");
   try {
     const response = await fetch(baseUrl, {
       signal,

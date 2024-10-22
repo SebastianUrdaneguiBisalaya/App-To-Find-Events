@@ -1,28 +1,62 @@
-import React, { useState } from "react";
+import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+type FormValues = {
+  startDate: string;
+  endDate: string;
+  searchQuery: string;
+};
 
 type InputSearchProps = {
   onSearch: (startDate: string, endDate: string, searchQuery: string) => void;
 };
 
 export const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSearch(startDate, endDate, searchQuery);
+  // const [startDate, setStartDate] = useState("");
+  // const [endDate, setEndDate] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormValues>({
+    defaultValues: {
+      startDate: "",
+      endDate: "",
+      searchQuery: "",
+    },
+  });
+  const startDate = watch("startDate");
+  const endDate = watch("endDate");
+
+  const validateDates = () => {
+    if ((startDate && !endDate) || (!startDate && endDate)) {
+      return "Debes ingresar ambas fechas o ninguna";
+    }
+    return true;
+  };
+
+  // const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   onSearch(startDate, endDate, searchQuery);
+  // };
+
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    onSearch(data.startDate, data.endDate, data.searchQuery);
   };
   return (
     <div className="w-full max-w-3xl mx-auto">
       <form
-        onSubmit={handleSearch}
+        onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col sm:flex-row items-center gap-2 p-2 bg-white sm:rounded-full rounded-2xl shadow-lg"
       >
         <div className="w-full sm:w-auto">
           <input
             type="date"
             value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+            // onChange={(e) => setStartDate(e.target.value)}
+            {...register("startDate", { validate: validateDates })}
             className="w-full sm:w-[10rem] px-3 py-2 rounded-full border border-gray-300 focus:outline-none focus_ring-2 focus:ring-primary text-sm"
             placeholder="Fecha inicio"
           />
@@ -31,15 +65,16 @@ export const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
           <input
             type="date"
             value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
+            // onChange={(e) => setEndDate(e.target.value)}
+            {...register("endDate", { validate: validateDates })}
             className="w-full sm:w-[10rem] px-3 py-2 rounded-full border border-gray-300 focus:outline-none focus_ring-2 focus:ring-primary text-sm"
             placeholder="Fecha fin"
           />
         </div>
         <input
           type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          // onChange={(e) => setSearchQuery(e.target.value)}
+          {...register("searchQuery")}
           placeholder="Buscar eventos"
           className="w-full sm:flex-grow px-4 py-2 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
         />
@@ -64,6 +99,7 @@ export const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
           <span className="sr-only">Buscar</span>
         </button>
       </form>
+      {errors.startDate && <p className="text-red-500 text-[0.7rem] text-center mt-1">{errors.startDate.message}</p>}
     </div>
   );
 };

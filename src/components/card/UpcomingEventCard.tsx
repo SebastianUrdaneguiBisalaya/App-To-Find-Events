@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 export interface UpcomingEvent {
@@ -13,12 +14,14 @@ interface UpcomingEventCardProps {
   data: UpcomingEvent;
 }
 
-export const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({ data }) => {
+export const UpcomingEventCard = React.forwardRef<HTMLAnchorElement, UpcomingEventCardProps>(({ data }, ref) => {
   const { image, title, location, date, price } = data;
+  const dateFormat = new Date(date).toISOString().split("T")[0];
   return (
     <Link
-      className="bg-white w-[11rem] md:w-[14rem] rounded-xl shadow-xl border-1 p-3"
+      className="bg-white min-w-[11rem] md:min-w-[14rem] rounded-xl shadow-xl border-1 p-3"
       to={`/eventdescription/${data.id}`}
+      ref={ref}
     >
       <img
         src={image}
@@ -57,7 +60,7 @@ export const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({ data }) =>
                 d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"
               />
             </svg>
-            <p className="w-[90%]">{date}</p>
+            <p className="w-[90%]">{dateFormat}</p>
           </div>
         </div>
         <div className="flex items-center justify-between gap-1 mt-1 text-orange-600 text-lg font-semibold">
@@ -76,4 +79,4 @@ export const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({ data }) =>
       </div>
     </Link>
   );
-};
+});
