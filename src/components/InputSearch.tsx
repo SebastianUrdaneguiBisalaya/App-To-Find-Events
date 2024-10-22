@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 
-export const InputSearch = () => {
+type InputSearchProps = {
+  onSearch: (startDate: string, endDate: string, searchQuery: string) => void;
+};
+
+export const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(startDate, endDate, searchQuery);
+    onSearch(startDate, endDate, searchQuery);
   };
   return (
     <div className="w-full max-w-3xl mx-auto">
