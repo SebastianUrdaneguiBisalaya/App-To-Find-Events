@@ -2,19 +2,39 @@ import { useState } from "react";
 import { PurchaseHistoryCard } from "../components";
 import { Tickets } from "./Tickets";
 
-type PurchaseHistoryCardProps = {
-  dateBuy: string;
+// type PurchaseHistoryCardProps = {
+//   dateBuy: string;
+//   nameEvent: string;
+//   priceEvent: number;
+//   dateEvent: string;
+//   placeEvent: string;
+//   hourEvent: string;
+//   onClick: () => void;
+// };
+
+type Purchase = {
+  id: string;
   nameEvent: string;
-  priceEvent: number;
   dateEvent: string;
   placeEvent: string;
+  nameUser: string;
+  orderId: string;
+  dayEvent: string;
   hourEvent: string;
+  typeTicket: string;
+  quantity: number;
+  barcode: string;
+};
+
+type Order = {
+  dateBuy: string;
+  tickets: Purchase[];
 };
 
 export const ListTicketHistory = () => {
-  const [selectedTicket, setSelectedTicket] = useState<PurchaseHistoryCardProps | null>(null);
-  const handleCardClick = (ticket: PurchaseHistoryCardProps) => {
-    setSelectedTicket(ticket);
+  const [selectedTicket, setSelectedTicket] = useState<Order | null>(null);
+  const handleCardClick = (order: Order) => {
+    setSelectedTicket(order);
   };
   return (
     <div className="font-poppins max-w-[1500px] mx-auto my-0 px-10 pt-5">
@@ -27,109 +47,81 @@ export const ListTicketHistory = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
         <PurchaseHistoryCard
           dateBuy="2024-12-20"
-          nameEvent="Bruno Mars | Stars 25"
-          priceEvent={150}
+          nameEvent="Bruno Mars | Stars 26"
           dateEvent="2025-01-05"
           placeEvent="Buenos Aires, Argentina"
           hourEvent="15:00"
           onClick={() =>
             handleCardClick({
               dateBuy: "2024-12-20",
-              nameEvent: "Bruno Mars | Stars 25",
-              priceEvent: 150,
-              dateEvent: "2025-01-05",
-              placeEvent: "Buenos Aires, Argentina",
-              hourEvent: "15:00",
+              tickets: [
+                {
+                  id: "003",
+                  nameEvent: "Coldplay | Music of the Spheres",
+                  dateEvent: "2025/02/10",
+                  placeEvent: "Lima, Perú",
+                  nameUser: "CARLA RUIZ",
+                  orderId: "002",
+                  dayEvent: "2025/02/10",
+                  hourEvent: "19:00",
+                  typeTicket: "VIP",
+                  barcode: "",
+                  quantity: 1,
+                },
+                {
+                  id: "004",
+                  nameEvent: "Coldplay | Music of the Spheres",
+                  dateEvent: "2025/02/10",
+                  placeEvent: "Lima, Perú",
+                  nameUser: "CARLA RUIZ",
+                  orderId: "002",
+                  dayEvent: "2025/02/10",
+                  hourEvent: "19:00",
+                  typeTicket: "VIP",
+                  barcode: "",
+                  quantity: 1,
+                },
+              ],
             })
           }
         />
         <PurchaseHistoryCard
           dateBuy="2024-12-20"
           nameEvent="Bruno Mars | Stars 25"
-          priceEvent={150}
           dateEvent="2025-01-05"
           placeEvent="Buenos Aires, Argentina"
           hourEvent="15:00"
           onClick={() =>
             handleCardClick({
               dateBuy: "2024-12-20",
-              nameEvent: "Bruno Mars | Stars 25",
-              priceEvent: 150,
-              dateEvent: "2025-01-05",
-              placeEvent: "Buenos Aires, Argentina",
-              hourEvent: "15:00",
-            })
-          }
-        />
-        <PurchaseHistoryCard
-          dateBuy="2024-12-20"
-          nameEvent="Bruno Mars | Stars 25"
-          priceEvent={150}
-          dateEvent="2025-01-05"
-          placeEvent="Buenos Aires, Argentina"
-          hourEvent="15:00"
-          onClick={() =>
-            handleCardClick({
-              dateBuy: "2024-12-20",
-              nameEvent: "Bruno Mars | Stars 25",
-              priceEvent: 150,
-              dateEvent: "2025-01-05",
-              placeEvent: "Buenos Aires, Argentina",
-              hourEvent: "15:00",
-            })
-          }
-        />
-        <PurchaseHistoryCard
-          dateBuy="2024-12-20"
-          nameEvent="Bruno Mars | Stars 25"
-          priceEvent={150}
-          dateEvent="2025-01-05"
-          placeEvent="Buenos Aires, Argentina"
-          hourEvent="15:00"
-          onClick={() =>
-            handleCardClick({
-              dateBuy: "2024-12-20",
-              nameEvent: "Bruno Mars | Stars 25",
-              priceEvent: 150,
-              dateEvent: "2025-01-05",
-              placeEvent: "Buenos Aires, Argentina",
-              hourEvent: "15:00",
-            })
-          }
-        />
-        <PurchaseHistoryCard
-          dateBuy="2024-12-20"
-          nameEvent="Bruno Mars | Stars 25"
-          priceEvent={150}
-          dateEvent="2025-01-05"
-          placeEvent="Buenos Aires, Argentina"
-          hourEvent="15:00"
-          onClick={() =>
-            handleCardClick({
-              dateBuy: "2024-12-20",
-              nameEvent: "Bruno Mars | Stars 25",
-              priceEvent: 150,
-              dateEvent: "2025-01-05",
-              placeEvent: "Buenos Aires, Argentina",
-              hourEvent: "15:00",
-            })
-          }
-        />
-        <PurchaseHistoryCard
-          dateBuy="2024-12-20"
-          nameEvent="Bruno Mars | Stars 25"
-          priceEvent={150}
-          dateEvent="2025-01-05"
-          placeEvent="Buenos Aires, Argentina"
-          hourEvent="15:00"
-          onClick={() =>
-            handleCardClick({
-              dateBuy: "2024-12-20",
-              nameEvent: "Bruno Mars | Stars 25",
-              priceEvent: 150,
-              dateEvent: "2025-01-05",
-              placeEvent: "Buenos Aires, Argentina",
-              hourEvent: "15:00",
+              tickets: [
+                {
+                  id: "005",
+                  nameEvent: "Coldplay | Music of the Spheres",
+                  dateEvent: "2025/02/10",
+                  placeEvent: "Lima, Perú",
+                  nameUser: "CARLA RUIZ",
+                  orderId: "002",
+                  dayEvent: "2025/02/10",
+                  hourEvent: "19:00",
+                  typeTicket: "VIP",
+                  barcode: "",
+                  quantity: 1,
+                },
+                {
+                  id: "006",
+                  nameEvent: "Coldplayyy | Music of the Spheres",
+                  dateEvent: "2025/02/10",
+                  placeEvent: "Lima, Perú",
+                  nameUser: "CARLA RUIZ",
+                  orderId: "002",
+                  dayEvent: "2025/02/10",
+                  hourEvent: "19:00",
+                  typeTicket: "VIP",
+                  barcode: "",
+                  quantity: 1,
+                },
+              ],
             })
           }
         />
@@ -158,23 +150,7 @@ export const ListTicketHistory = () => {
               </svg>
             </button>
             <div className="w-96 h-full">
-              <Tickets
-                tickets={[
-                  {
-                    id: "001",
-                    nameEvent: "Bruno Mars | El Fantasma",
-                    dateEvent: "2025/05/05",
-                    placeEvent: "Buenos Aires, Argentina",
-                    nameUser: "SEBASTIAN MARAT URDANEGUI BISALAYA",
-                    orderId: "001",
-                    dayEvent: "2025/05/05",
-                    hourEvent: "15:00",
-                    typeTicket: "Oriente",
-                    quantity: 2,
-                    barcode: "",
-                  },
-                ]}
-              />
+              <Tickets tickets={selectedTicket.tickets} />
             </div>
           </div>
         </dialog>

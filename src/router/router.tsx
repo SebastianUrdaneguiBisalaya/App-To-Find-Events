@@ -37,9 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/history",
         element: (
-          <ProtectedRoute>
-            <ListTicketHistory />
-          </ProtectedRoute>
+          // <ProtectedRoute>
+          //   <ListTicketHistory />
+          // </ProtectedRoute>
+          <ListTicketHistory />
         ),
       },
     ],

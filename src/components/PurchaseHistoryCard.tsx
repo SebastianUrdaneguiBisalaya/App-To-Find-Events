@@ -1,7 +1,7 @@
 type PurchaseHistoryCardProps = {
   dateBuy: string;
   nameEvent: string;
-  priceEvent: number;
+  // priceEvent: number;
   dateEvent: string;
   placeEvent: string;
   hourEvent: string;
@@ -11,7 +11,7 @@ type PurchaseHistoryCardProps = {
 export const PurchaseHistoryCard = ({
   dateBuy,
   nameEvent,
-  priceEvent,
+  // priceEvent,
   dateEvent,
   placeEvent,
   hourEvent,
@@ -28,7 +28,7 @@ export const PurchaseHistoryCard = ({
         </p>
         <div className="flex xs:flex-row flex-col justify-between xs:items-center items-start">
           <h4 className="max-w-56 text-left text-base font-bold mt-2">{nameEvent ? nameEvent : ""}</h4>
-          <p className="text-base mt-2 font-bold text-green-800">{`S/. ${priceEvent ? priceEvent : ""}`}</p>
+          {/* <p className="text-base mt-2 font-bold text-green-800">{`S/. ${priceEvent ? priceEvent : ""}`}</p> */}
         </div>
         <p className="text-left text-xs text-gray-600 mt-2">Datos del evento:</p>
         <p className="flex justify-between items-center text-left text-xs font-medium text-gray-500 mt-2">
