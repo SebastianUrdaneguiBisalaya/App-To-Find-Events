@@ -25,8 +25,8 @@ const CustomMarkerIcon = () => {
       />
     </svg>`,
     className: "svg-location-icon",
-    iconSize: [36, 28], // Ajusta el tamaño según las dimensiones de tu SVG
-    iconAnchor: [18, 10], // Ancla el marcador en la parte inferior
+    iconSize: [36, 28],
+    iconAnchor: [18, 10],
   });
 };
 

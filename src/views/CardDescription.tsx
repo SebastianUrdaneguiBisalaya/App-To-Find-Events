@@ -1,46 +1,144 @@
 import { MainDetailsCard, Texts, MapComponent } from "../components";
 import { ShoppingCart } from "../Layout/ShoppingCart";
+import { Link, useParams } from "react-router-dom";
+import { fetchData } from "../services";
+import { useEffect, useRef, useState } from "react";
+
+export interface Tickets {
+  ticket_id: string;
+  event_id: string;
+  ticket_type: string;
+  ticket_price: string;
+  ticket_quantity: number;
+}
+
+export interface EventDetailById {
+  event_name: string;
+  event_category: string;
+  event_date: Date;
+  event_hour: Date;
+  event_place: string;
+  event_latitude: number;
+  event_longitude: number;
+  event_capacity: number;
+  event_img: string;
+  event_description: string;
+  event_artist: string;
+  pre_sale_date: Date;
+  pre_sale_end_date: Date;
+  pre_sale_discount: number;
+  tickets: Tickets[];
+}
+
+interface CartItemAPI {
+  event_id: string;
+  event_name: string;
+  tickettype: string;
+  ticket_price: string;
+  taxes: string;
+  ticket_type: string;
+}
+
+interface CartItem {
+  event_id: string;
+  title: string;
+  tickettype: string;
+  price: string;
+  taxes: string;
+  details: string;
+}
 
 export const CardDescription = () => {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen md:grid md:grid-cols-2 gap-4 md:w-[906px] mx-auto my-auto px-10 py-10 md:shadow-md rounded-[20px]">
-      <div className="flex flex-col items-center justify-center max-w-[400px]">
-        <img
-          src="https://www.hindustantimes.com/ht-img/img/2024/09/22/550x309/AUSTRIA-BRITAIN-MUSIC-CONCERT-COLDPLAY-SECURITY-12_1726973147488_1726973178311.jpg"
-          alt="Image"
-          className="w-full h-auto rounded-lg"
-        />
-        <div className="inset-x-0 top-[30%] md:top-[1/3] flex justify-center transform -translate-y-1/3">
-          <MainDetailsCard
-            artist="Coldplay:"
-            eventTitle="Viva La Vida"
-            location="London"
-            date="December 12 2022"
-            capacity="100+ participants"
-          />
-        </div>
-        <div className="w-full px-4">
-          <h3 className="font-poppins text-xl font-medium">Description</h3>
-          <Texts
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in arcu. Curabitur ut odio vel est tempor bibendum. Donec semper justo a lotus. Suspendisse potenti. In est risus, auctor ut, tristique ac, eleifend vitae, erat."
-            type="secondary"
-            color="black"
-          />
-        </div>
-      </div>
+  const { id } = useParams<{ id: string }>();
+  const [eventDescription, setEventDescription] = useState<EventDetailById>();
+  const [ticketsEvent, setTicketEvents] = useState<CartItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
-      <div className="max-w-md mt-4">
-        <h3 className="font-poppins text-xl font-medium">Ubicación</h3>
-        <MapComponent
-          market="London"
-          position={[51.505, -0.09]}
-        />
-        <div className="mt-2">
-          <h3 className="font-poppins text-xl font-medium">Tarifario</h3>
-          <ShoppingCart />
+  const getEventDetailById = async (id: string) => {
+    try {
+      setIsLoading(true);
+      const controller = new AbortController();
+      abortControllerRef.current = controller;
+      const result = await fetchData({ baseUrl: `http://localhost:3000/eventdetail/${id}`, signal: controller.signal });
+      if (result) {
+        setEventDescription(result);
+        const ticketsFormat = result.tickets.map((item: CartItemAPI) => ({
+          eventId: item.event_id,
+          title: result.event_name,
+          tickettype: "Entrada General",
+          price: item.ticket_price,
+          taxes: "Incluye impuestos",
+          details: item.ticket_type,
+        }));
+        setTicketEvents(ticketsFormat);
+      }
+    } catch (error) {
+      throw new Error(`Unnable to get the event detail by id. ${error}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      getEventDetailById(id);
+    }
+    return () => {
+      if (abortControllerRef.current && isLoading) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
+
+  return (
+    <>
+      {eventDescription && ticketsEvent && (
+        <div className="flex flex-col items-center justify-center min-h-screen md:grid md:grid-cols-2 gap-4 md:w-[906px] mx-auto my-auto px-10 py-10 md:shadow-md rounded-[20px]">
+          <div className="flex flex-col items-center justify-center max-w-[400px]">
+            <img
+              src={eventDescription?.event_img}
+              alt="Image"
+              className="w-full h-auto rounded-lg"
+            />
+            <div className="inset-x-0 top-[30%] md:top-[1/3] flex justify-center transform -translate-y-1/3">
+              <MainDetailsCard
+                artist={eventDescription?.event_artist}
+                eventTitle={eventDescription?.event_name}
+                location={eventDescription?.event_place}
+                date={new Date(eventDescription?.event_date).toISOString().split("T")[0]}
+                capacity="100+ participants"
+              />
+            </div>
+            <div className="w-full px-4">
+              <h3 className="font-poppins text-xl font-medium">Description</h3>
+              <Texts
+                text={eventDescription?.event_description}
+                type="secondary"
+                color="black"
+              />
+            </div>
+          </div>
+
+          <div className="max-w-md mt-4">
+            <h3 className="font-poppins text-xl font-medium">Ubicación</h3>
+            <MapComponent
+              market="Peru"
+              position={[eventDescription?.event_latitude, eventDescription?.event_longitude]}
+            />
+            <div className="mt-2">
+              <h3 className="font-poppins text-xl font-medium">Tarifario</h3>
+              <ShoppingCart cartItems={ticketsEvent} />
+            </div>
+            <Link
+              to={"/trendingevents?openPopup=true"}
+              className="w-full font-poppins text-[#761CBC] hover:text-[#0DCDAA]  font-medium mt-2 flex justify-center"
+            >
+              Guardar y seguir comprando
+            </Link>
+          </div>
         </div>
-        <h4 className="font-poppins text-[#761CBC] font-medium mt-2 flex justify-center">Tickets</h4>
-      </div>
-    </div>
+      )}
+    </>
   );
 };

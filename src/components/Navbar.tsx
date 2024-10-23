@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BuyTickets } from "../Layout";
+import { useLocation } from "react-router-dom";
 
 export const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const openPopup = searchParams.get("openPopup") === "true";
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

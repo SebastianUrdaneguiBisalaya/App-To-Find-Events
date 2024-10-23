@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ShoppingCart } from "./ShoppingCart";
 import { CartIcon } from "../components";
+import { useLocation } from "react-router-dom";
 
 export const BuyTickets = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const openPopup = searchParams.get("openPopup") === "true";
+    if (openPopup) {
+      setIsOpen(true);
+    }
+  }, [location.search]);
 
   return (
     <div>

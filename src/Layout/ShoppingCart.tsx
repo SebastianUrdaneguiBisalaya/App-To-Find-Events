@@ -2,6 +2,7 @@ import { ShoppingCartItem, TotalAmountBar } from "../components";
 import { useQuantity } from "../hooks/useQuantity";
 
 interface CartItem {
+  event_id: string;
   title: string;
   tickettype: string;
   price: string;
@@ -9,32 +10,11 @@ interface CartItem {
   details: string;
 }
 
-const cartItems: CartItem[] = [
-  {
-    title: "Keane: Hopes and Fears 20 years world tour",
-    tickettype: "Entrada General",
-    price: "80.00",
-    taxes: "Incluye impuestos",
-    details: "Tribuna",
-  },
-  {
-    title: "Keane: Hopes and Fears 20 years world tour",
-    tickettype: "Entrada VIP",
-    price: "100.00",
-    taxes: "Incluye impuestos",
-    details: "Campo",
-  },
-  {
-    title: "Keane: Hopes and Fears 20 years world tour",
-    tickettype: "Entrada VIP + Meet & Greet",
-    price: "180.00",
-    taxes: "Incluye impuestos",
-    details: "Incluye meet & greet",
-  },
-];
-
-export const ShoppingCart: React.FC = () => {
-  const { quantities, handleQuantityChange } = useQuantity(Array(cartItems.length).fill(0));
+interface ListTicketsPrice {
+  cartItems: CartItem[];
+}
+export const ShoppingCart = ({ cartItems = [] }: ListTicketsPrice) => {
+  const { quantities, handleQuantityChange } = useQuantity(Array(cartItems?.length).fill(0));
 
   const handleSelectChange = (index: number) => (event: React.ChangeEvent<HTMLSelectElement>) => {
     handleQuantityChange(index, parseInt(event.target.value));
@@ -51,7 +31,7 @@ export const ShoppingCart: React.FC = () => {
             <ShoppingCartItem
               title={item.title}
               tickettype={item.tickettype}
-              price={item.price}
+              price={`S/. ${item.price}`}
               taxes={item.taxes}
               details={item.details}
               onChange={handleSelectChange(index)}
