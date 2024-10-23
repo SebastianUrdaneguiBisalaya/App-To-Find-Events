@@ -1,6 +1,9 @@
+export interface ErrorResponse {
+  message: string;
+}
 export interface ResponseApi<T> {
-  data: T;
-  status: number;
+  data?: T;
+  error?: ErrorResponse;
 }
 
 export interface LoginRequest {

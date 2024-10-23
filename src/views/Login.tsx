@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,7 +8,9 @@ import { LoginFormFields, LoginSchema } from "../schema/Login.schema";
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { login, getRememberedEmail, setRememberedEmail, error: loginError } = useAuthStore((state) => state);
+  const [error, setError] = useState<string | null>(null);
+  const { login, getRememberedEmail, setRememberedEmail, user } = useAuthStore((state) => state);
+
   const {
     register,
     handleSubmit,
@@ -23,6 +25,12 @@ export const Login: React.FC = () => {
   });
 
   useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  });
+
+  useEffect(() => {
     const rememberedEmail = getRememberedEmail();
     if (rememberedEmail) {
       setValue("email", rememberedEmail);
@@ -31,14 +39,21 @@ export const Login: React.FC = () => {
   }, [setValue]);
 
   const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
-    await login({ email: data.email, password: data.password });
-    if (data.rememberMe) {
-      setRememberedEmail(data.email);
-    } else {
-      setRememberedEmail(null);
+    try {
+      const { response } = await login({ email: data.email, password: data.password });
+      if (response?.error) {
+        setError(response.error.message);
+      }
+      if (response?.data) {
+        if (data.rememberMe) {
+          setRememberedEmail(data.email);
+        } else {
+          setRememberedEmail(null);
+        }
+      }
+    } catch (err: any) {
+      setError(err.message);
     }
-    console.log("Login successful");
-    navigate("/trendingevents");
   };
 
   return (
@@ -88,7 +103,7 @@ export const Login: React.FC = () => {
                   name="rememberMe"
                   control={control}
                 />
-                {loginError && <span className="text-red-500 text-sm text-center">{loginError}</span>}
+                {error && <span className="text-red-500 text-sm text-center">{error}</span>}
                 <Button
                   text="Iniciar sesión"
                   type="submit"

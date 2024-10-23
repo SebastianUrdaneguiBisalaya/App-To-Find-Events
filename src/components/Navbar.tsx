@@ -1,16 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BuyTickets } from "../Layout";
 import { useLocation } from "react-router-dom";
+import { useAuthStore } from "../store/AuthStore";
 
 export const NavBar: React.FC = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const openPopup = searchParams.get("openPopup") === "true";
 
+  const { user, logout } = useAuthStore((state) => state);
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
   };
 
   return (
@@ -73,19 +82,31 @@ export const NavBar: React.FC = () => {
               <li className="text-sm text-black hover:text-primary font-poppins text-center">
                 <Link to={"/userinfo"}>Perfil</Link>
               </li>
+
               <li className="flex flex-row justify-center items-center">
-                <Link
-                  className="text-sm text-black hover:text-primary font-poppins text-center"
-                  to={"/login"}
-                >
-                  Login/
-                </Link>
-                <Link
-                  className="text-sm text-black hover:text-primary font-poppins text-center"
-                  to={"/signup"}
-                >
-                  Sign Up
-                </Link>
+                {user ? (
+                  <button
+                    className="text-sm text-black hover:text-primary font-poppins text-center"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <>
+                    <Link
+                      className="text-sm text-black hover:text-primary font-poppins text-center"
+                      to={"/login"}
+                    >
+                      Login/
+                    </Link>
+                    <Link
+                      className="text-sm text-black hover:text-primary font-poppins text-center"
+                      to={"/signup"}
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
               </li>
             </ul>
           </div>
@@ -207,18 +228,29 @@ export const NavBar: React.FC = () => {
                 />
               </svg>
               <div className="flex flex-row">
-                <Link
-                  className="text-black hover:text-primary text-sm font-poppins"
-                  to={"/login"}
-                >
-                  Login/
-                </Link>
-                <Link
-                  className="text-black hover:text-primary text-sm font-poppins"
-                  to={"/signup"}
-                >
-                  Sign Up
-                </Link>
+                {user ? (
+                  <button
+                    className="text-sm text-black hover:text-primary font-poppins text-center"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <>
+                    <Link
+                      className="text-sm text-black hover:text-primary font-poppins text-center"
+                      to={"/login"}
+                    >
+                      Login/
+                    </Link>
+                    <Link
+                      className="text-sm text-black hover:text-primary font-poppins text-center"
+                      to={"/signup"}
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
               </div>
             </li>
           </ul>
