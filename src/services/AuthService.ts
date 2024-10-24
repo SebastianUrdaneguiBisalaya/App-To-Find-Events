@@ -1,39 +1,52 @@
-import { LoginResponse, ResponseApi, SignUpRequest, SignUpResponse } from "../types/Authentication/AuthService.types";
+import { API_BASE_URL } from "../constants/constants";
+import {
+  LoginRequest,
+  LoginResponse,
+  ResponseApi,
+  SignUpRequest,
+  SignUpResponse,
+} from "../types/Authentication/AuthService.types";
+import { fetchDataPost } from "./FetchData";
 
-// TO DELETE
-const generateFakeJwt = (email: string) => {
-  const header = { alg: "HS256", typ: "JWT" };
-  const payload = { email, exp: Math.floor(Date.now() / 1000) + 60 * 60 };
-  const encodedHeader = btoa(JSON.stringify(header));
-  const encodedPayload = btoa(JSON.stringify(payload));
-  return `${encodedHeader}.${encodedPayload}.fakeSignature`;
+export const login = async (params: LoginRequest, signal?: AbortSignal): Promise<ResponseApi<LoginResponse>> => {
+  const response = await fetchDataPost({
+    baseUrl: `${API_BASE_URL}/auth/login`,
+    signal,
+    options: {
+      method: "POST",
+      body: JSON.stringify(params),
+      credentials: "include",
+    },
+  });
+  return response;
 };
 
-export const login = (email: string, password: string): Promise<ResponseApi<LoginResponse>> => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (email === "admin@admin.com" && password === "admin123") {
-        const token = generateFakeJwt(email);
-        resolve({ data: { accessToken: token, expireIn: 3600 }, status: 200 });
-      } else {
-        reject(new Error("Credenciales incorrectas"));
-      }
-    }, 1000);
+export const logout = async (): Promise<ResponseApi<LoginResponse>> => {
+  const response = await fetchDataPost({
+    baseUrl: `${API_BASE_URL}/auth/logout`,
+    options: {
+      method: "POST",
+      credentials: "include",
+    },
   });
+  return response;
 };
 
-export const signUp = (params: SignUpRequest): Promise<ResponseApi<SignUpResponse>> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ data: { success: true }, status: 200 });
-    }, 1000);
+export const getUser = () => {
+  const response = fetch(`${API_BASE_URL}/users/b232305e-777b-46c1-b5d1-180be250f462`, {
+    credentials: "include",
   });
+  return response;
 };
 
-export const logout = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ success: true, status: 200 });
-    }, 1000);
+export const signUp = async (params: SignUpRequest, signal?: AbortSignal): Promise<ResponseApi<SignUpResponse>> => {
+  const response = await fetchDataPost({
+    baseUrl: `${API_BASE_URL}/auth/sign-up`,
+    signal,
+    options: {
+      method: "POST",
+      body: JSON.stringify(params),
+    },
   });
+  return response;
 };

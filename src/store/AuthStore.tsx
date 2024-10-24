@@ -10,33 +10,35 @@ export const useAuthStore = create<AuthState>()(
       (set, get) => ({
         isAuthenticated: false,
         rememberedEmail: null,
-        token: null,
-        error: null,
+        user: null,
         login: async (params: LoginRequest) => {
-          const { email, password } = params;
-          try {
-            const response = await AuthService.login(email, password);
-            set({ isAuthenticated: true, token: response.data.accessToken });
-          } catch (e) {
-            if (e instanceof Error) {
-              set({ error: e.message });
-            }
+          const controller = new AbortController();
+          const response = await AuthService.login(params, controller.signal);
+          if (response.error) {
+            set({ user: null, isAuthenticated: false });
           }
+          set({ isAuthenticated: true, user: response.data });
+          return {
+            response,
+            abort: () => controller.abort(),
+          };
         },
         signUp: async (params: SignUpRequest) => {
-          try {
-            await AuthService.signUp(params);
-            // Activar la autenticación aquí si es necesario
-            // set({ isAuthenticated: true });
-          } catch (e) {
-            if (e instanceof Error) {
-              set({ error: e.message });
-            }
+          const controller = new AbortController();
+          const response = await AuthService.signUp(params, controller.signal);
+          if (response.error) {
+            set({ user: null, isAuthenticated: false });
           }
+          set({ isAuthenticated: true, user: response.data });
+          return {
+            response,
+            abort: () => controller.abort(),
+          };
         },
+
         logout: async () => {
           await AuthService.logout();
-          set({ isAuthenticated: false, token: null });
+          set({ isAuthenticated: false, user: null });
         },
         setRememberedEmail: (email: string | null) => set({ rememberedEmail: email }),
         getRememberedEmail: () => get().rememberedEmail,

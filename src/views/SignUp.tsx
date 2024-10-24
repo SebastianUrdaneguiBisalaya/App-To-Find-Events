@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,7 +8,9 @@ import { SignUpFormFields, SignUpSchema } from "../schema/SignUp.schema";
 
 export const SignUp: React.FC = () => {
   const navigate = useNavigate();
-  const { signUp, error: signUpError } = useAuthStore((state) => state);
+  const [error, setError] = useState<string | null>(null);
+  const { signUp, user } = useAuthStore((state) => state);
+
   const {
     register,
     handleSubmit,
@@ -17,10 +19,21 @@ export const SignUp: React.FC = () => {
     resolver: zodResolver(SignUpSchema),
   });
 
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  });
+
   const onSubmit: SubmitHandler<SignUpFormFields> = async (data) => {
-    await signUp(data);
-    console.log("SignUp successful");
-    navigate("/");
+    try {
+      const { response } = await signUp(data);
+      if (response?.error) {
+        setError(response.error.message);
+      }
+    } catch (err: any) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -76,7 +89,7 @@ export const SignUp: React.FC = () => {
                 {...register("confirmPassword")}
                 error={errors.confirmPassword?.message}
               />
-              {signUpError && <span className="text-red-500 text-sm text-center">{signUpError}</span>}
+              {error && <span className="text-red-500 text-sm text-center">{error}</span>}
               <Button
                 text="Regístrate"
                 type="submit"
