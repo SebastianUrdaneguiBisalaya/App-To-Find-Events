@@ -9,6 +9,8 @@ import {
   ListTicketHistory,
   UserInfo,
   CardDescription,
+  Success,
+  Cancel,
 } from "../views";
 import ProtectedRoute from "./ProtectedRoute";
 import { Navigate } from "react-router-dom";
@@ -33,6 +35,14 @@ export const router = createBrowserRouter([
       {
         path: "/upcomingevents",
         element: <UpcomingEvents />,
+      },
+      {
+        path: "/success",
+        element: <Success />,
+      },
+      {
+        path: "/cancel",
+        element: <Cancel />,
       },
       {
         path: "/history",
