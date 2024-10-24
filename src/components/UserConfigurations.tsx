@@ -1,15 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuthStore } from "../store/AuthStore";
 
 interface UserConfigurationsProps {
-  name: string;
-  lastName: string;
-  email: string;
+  name?: string;
+  lastName?: string;
+  email?: string;
 }
 
-export const UserConfigurations: React.FC<UserConfigurationsProps> = ({ name, lastName, email }) => {
-  const [changeName, setChangeName] = useState<string>(name);
-  const [changeLastName, setChangeLastname] = useState<string>(lastName);
-  const [changeEmail, setChangeEmail] = useState<string>(email);
+export const UserConfigurations: React.FC<UserConfigurationsProps> = () => {
+  const { user } = useAuthStore((state) => state); // Obtén los datos del usuario autenticado
+  const [changeName, setChangeName] = useState<string>(user?.name || "");
+  const [changeLastName, setChangeLastname] = useState<string>(user?.lastName || "");
+  const [changeEmail, setChangeEmail] = useState<string>(user?.email || "");
+
+  useEffect(() => {
+    // Cuando el componente se monta, se actualizan los campos con los valores del usuario
+    if (user) {
+      setChangeName(user.name || "");
+      setChangeLastname(user.lastName || "");
+      setChangeEmail(user.email || "");
+    }
+  }, [user]);
+
   return (
     <div className="flex flex-col md:flex-row mx-auto items-center justify-center bg-white max-w-[342px] p-5">
       <div className="w-full text-left px-4 md:px-10">
