@@ -37,10 +37,9 @@ export const router = createBrowserRouter([
       {
         path: "/history",
         element: (
-          // <ProtectedRoute>
-          //   <ListTicketHistory />
-          // </ProtectedRoute>
-          <ListTicketHistory />
+          <ProtectedRoute>
+            <ListTicketHistory />
+          </ProtectedRoute>
         ),
       },
     ],
@@ -63,6 +62,10 @@ export const router = createBrowserRouter([
   },
   {
     path: "/eventdescription/:id",
-    element: <CardDescription />,
+    element: (
+      <ProtectedRoute>
+        <CardDescription />
+      </ProtectedRoute>
+    ),
   },
 ]);
