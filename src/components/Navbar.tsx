@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BuyTickets } from "../Layout";
-import { useLocation } from "react-router-dom";
 import { useAuthStore } from "../store/AuthStore";
 
 export const NavBar: React.FC = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const openPopup = searchParams.get("openPopup") === "true";
 
   const { user, logout } = useAuthStore((state) => state);
 
@@ -46,12 +41,12 @@ export const NavBar: React.FC = () => {
           </svg>
         </button>
 
-        <div className="flex justify-center items-center mr-4 relative">
+        {/* <div className="flex justify-center items-center mr-4 relative">
           <span className="absolute top-[0.6rem] right-[0.05rem] bg-red-500 text-white rounded-full text-xs px-1">
             2
           </span>
           <BuyTickets />
-        </div>
+        </div> */}
       </div>
 
       <div className="hidden md:flex md:justify-center md:items-center md:bg-white md:shadow-lg max-w-[64rem] md:px-6 md:h-[4.5rem] sm:rounded-full rounded-2xl md:mt-4 md:mx-2">
@@ -112,10 +107,10 @@ export const NavBar: React.FC = () => {
           </div>
         </div>
 
-        <div className="relative mr-4 flex">
+        {/* <div className="relative mr-4 flex">
           <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-xs px-1">2</span>
           <BuyTickets />
-        </div>
+        </div> */}
       </div>
 
       <div

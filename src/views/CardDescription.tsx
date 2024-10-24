@@ -1,6 +1,6 @@
 import { MainDetailsCard, Texts, MapComponent } from "../components";
 import { ShoppingCart } from "../Layout/ShoppingCart";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { fetchData } from "../services";
 import { useEffect, useRef, useState } from "react";
 
@@ -32,6 +32,7 @@ export interface EventDetailById {
 
 interface CartItemAPI {
   event_id: string;
+  ticket_id: string;
   event_name: string;
   tickettype: string;
   ticket_price: string;
@@ -41,6 +42,7 @@ interface CartItemAPI {
 
 interface CartItem {
   event_id: string;
+  ticket_id: string;
   title: string;
   tickettype: string;
   price: string;
@@ -64,7 +66,8 @@ export const CardDescription = () => {
       if (result) {
         setEventDescription(result);
         const ticketsFormat = result.tickets.map((item: CartItemAPI) => ({
-          eventId: item.event_id,
+          event_id: item.event_id,
+          ticket_id: item.ticket_id,
           title: result.event_name,
           tickettype: "Entrada General",
           price: item.ticket_price,
@@ -130,12 +133,6 @@ export const CardDescription = () => {
               <h3 className="font-poppins text-xl font-medium">Tarifario</h3>
               <ShoppingCart cartItems={ticketsEvent} />
             </div>
-            <Link
-              to={"/trendingevents?openPopup=true"}
-              className="w-full font-poppins text-[#761CBC] hover:text-[#0DCDAA]  font-medium mt-2 flex justify-center"
-            >
-              Guardar y seguir comprando
-            </Link>
           </div>
         </div>
       )}

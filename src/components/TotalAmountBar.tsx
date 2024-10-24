@@ -1,14 +1,33 @@
 import { Button } from "./Button";
 import { Texts } from "./Texts";
+import { useAuthStore } from "../store/AuthStore";
+import { v4 as uuidv4 } from "uuid";
 
 interface PropTotalAmountBar {
   id: string;
   product: string;
   price: string;
+  ticketId: string;
+  purchaseAmount: string;
+  quantity: number;
 }
 
 interface DataTotalBuy {
   dataTotalBuy: PropTotalAmountBar[];
+}
+
+interface Purchase {
+  purchase_id: string;
+  ticket_id: string;
+  purchase_amount: number;
+}
+
+interface Purchases {
+  order_id: string;
+  event_id: string;
+  user_id: string;
+  totalAmount: number;
+  purchases: Purchase[];
 }
 
 function getTotalAmount(dataTotalBuy: PropTotalAmountBar[]) {
@@ -17,7 +36,34 @@ function getTotalAmount(dataTotalBuy: PropTotalAmountBar[]) {
   return result;
 }
 
+const purchases = (eventTickets: PropTotalAmountBar[], userId: string): Purchases => {
+  let totalAmount = 0;
+  let purchases: Purchase[] = [];
+  eventTickets.forEach((item) => {
+    const ticketPrice = parseFloat(item.purchaseAmount);
+    if (item.quantity > 0) {
+      totalAmount += ticketPrice * item.quantity;
+    }
+    for (let i = 0; i < item.quantity; i++) {
+      purchases.push({
+        purchase_id: uuidv4(),
+        ticket_id: item.ticketId,
+        purchase_amount: ticketPrice,
+      });
+    }
+  });
+  return {
+    order_id: uuidv4(),
+    event_id: eventTickets[0].ticketId,
+    user_id: userId,
+    totalAmount: totalAmount,
+    purchases: purchases,
+  };
+};
+
 export const TotalAmountBar = ({ dataTotalBuy }: DataTotalBuy) => {
+  const { user } = useAuthStore((state) => state);
+  const res = purchases(dataTotalBuy, user?.id);
   return (
     <div className="flex min-[300px]:flex-row flex-col justify-start min-[300px]:items-center min-[300px]:justify-between bg-[#F2F2F2] p-3 gap-1">
       <div>
@@ -48,7 +94,7 @@ export const TotalAmountBar = ({ dataTotalBuy }: DataTotalBuy) => {
       <div>
         <Button
           text="Comprar Ticket"
-          onClick={() => console.log("Comprar Ticket")}
+          onClick={() => console.log("Comprar Ticket", res)}
         />
       </div>
     </div>

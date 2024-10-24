@@ -3,6 +3,7 @@ import { useQuantity } from "../hooks/useQuantity";
 
 interface CartItem {
   event_id: string;
+  ticket_id: string;
   title: string;
   tickettype: string;
   price: string;
@@ -42,8 +43,11 @@ export const ShoppingCart = ({ cartItems = [] }: ListTicketsPrice) => {
       <div className="w-full max-w-96 min-w-[342px]">
         <TotalAmountBar
           dataTotalBuy={cartItems?.map((item, index) => ({
-            id: item.title,
+            id: item.event_id,
+            ticketId: item.ticket_id,
+            purchaseAmount: item.price,
             product: item.title,
+            quantity: quantities[index],
             price: (parseFloat(item.price) * quantities[index]).toFixed(2),
           }))}
         />
