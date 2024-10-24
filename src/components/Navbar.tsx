@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BuyTickets } from "../Layout";
+import { UserInfo } from "../views/UserInfo";
 
 export const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -92,7 +93,7 @@ export const NavBar: React.FC = () => {
           <BuyTickets />
         </div>
       </div>
-
+      <UserInfo></UserInfo>
       <div
         className={`fixed top-0 left-0 h-full w-72 bg-white shadow-lg transform ${isOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 ease-in-out z-50 md:hidden`}
       >
@@ -225,6 +226,7 @@ export const NavBar: React.FC = () => {
             >
               Regresar
             </button>
+           
           </div>
         </div>
       </div>
