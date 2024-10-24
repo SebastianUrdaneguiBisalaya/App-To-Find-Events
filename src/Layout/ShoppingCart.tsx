@@ -48,6 +48,7 @@ export const ShoppingCart = ({ cartItems = [] }: ListTicketsPrice) => {
             purchaseAmount: item.price,
             product: item.title,
             quantity: quantities[index],
+            ticket_name: `${item.title} - ${item.tickettype}`,
             price: (parseFloat(item.price) * quantities[index]).toFixed(2),
           }))}
         />

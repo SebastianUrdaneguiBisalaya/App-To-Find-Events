@@ -69,7 +69,7 @@ export const CardDescription = () => {
           event_id: item.event_id,
           ticket_id: item.ticket_id,
           title: result.event_name,
-          tickettype: "Entrada General",
+          tickettype: item.ticket_type,
           price: item.ticket_price,
           taxes: "Incluye impuestos",
           details: item.ticket_type,

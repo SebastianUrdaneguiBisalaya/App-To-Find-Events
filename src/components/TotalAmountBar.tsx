@@ -10,6 +10,7 @@ interface PropTotalAmountBar {
   ticketId: string;
   purchaseAmount: string;
   quantity: number;
+  ticket_name: string;
 }
 
 interface DataTotalBuy {
@@ -20,6 +21,7 @@ interface Purchase {
   purchase_id: string;
   ticket_id: string;
   purchase_amount: number;
+  ticket_name: string;
 }
 
 interface Purchases {
@@ -49,6 +51,7 @@ const purchases = (eventTickets: PropTotalAmountBar[], userId: string): Purchase
         purchase_id: uuidv4(),
         ticket_id: item.ticketId,
         purchase_amount: ticketPrice,
+        ticket_name: item.ticket_name,
       });
     }
   });
