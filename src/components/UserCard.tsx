@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-import axios from "axios";
 import { useAuthStore } from "../store/AuthStore"
 
 interface UserCardProps {
@@ -41,16 +40,24 @@ export const UserCard: React.FC<UserCardProps> = ({ avatar }) => {
     formData.append("cloud_name", "dyg2tq33j");
 
     try {
-      const response = await axios.post(
+      const response = await fetch(
         "https://api.cloudinary.com/v1_1/dyg2tq33j/image/upload",
-        formData
+        {
+          method: "POST",
+          body: formData,
+        }
       );
-      const imageUrl = response.data.secure_url;
+
+      if (!response.ok) {
+        throw new Error("Error en la respuesta de Cloudinary");
+      }
+
+      const data = await response.json();
+      const imageUrl = data.secure_url;
       setImageURL(imageUrl);
       console.log("Imagen subida exitosamente:", imageUrl);
 
       await updateUserWithImage(imageUrl);
-
     } catch (error) {
       console.error("Error subiendo la imagen a Cloudinary:", error);
     }
@@ -59,18 +66,28 @@ export const UserCard: React.FC<UserCardProps> = ({ avatar }) => {
   const updateUserWithImage = async (imageUrl: string) => {
     const userData = {
       user_id: user?.id,
-      user_avatar: imageUrl
+      user_avatar: imageUrl,
     };
 
     try {
-      const response = await axios.put(
-        "http://127.0.0.1:3000/users/" + userData.user_id,
-        userData,
+      const response = await fetch(
+        `http://127.0.0.1:3000/users/${userData.user_id}`,
         {
-          withCredentials: true 
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(userData),
         }
       );
-      console.log("Datos del usuario actualizados:", response.data);
+
+      if (!response.ok) {
+        throw new Error("Error al actualizar los datos del usuario");
+      }
+
+      const data = await response.json();
+      console.log("Datos del usuario actualizados:", data);
     } catch (error) {
       console.error("Error al actualizar los datos del usuario:", error);
     }
@@ -87,7 +104,7 @@ export const UserCard: React.FC<UserCardProps> = ({ avatar }) => {
     <div className="flex flex-col md:flex-row mx-auto items-center justify-center bg-white max-w-[342px] p-5">
       <div className="flex flex-col items-center">
         <img
-          src={ user?.avatar ||imageURL }
+          src={user?.avatar || imageURL}
           alt="Avatar"
           className="w-[104px] h-[104px] rounded-full"
         />
