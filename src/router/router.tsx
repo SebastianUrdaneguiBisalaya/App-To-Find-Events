@@ -9,6 +9,7 @@ import {
   ListTicketHistory,
   UserInfo,
   CardDescription,
+  SuccessVerification,
   Success,
   Cancel,
 } from "../views";
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: "/cancel",
         element: <Cancel />,
+      },
+      {
+        path: "/verified",
+        element: <SuccessVerification />,
       },
       {
         path: "/history",
