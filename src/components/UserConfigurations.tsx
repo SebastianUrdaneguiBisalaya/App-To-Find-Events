@@ -1,26 +1,27 @@
 import { useState, useEffect } from "react";
-import { useAuthStore } from "../store/AuthStore";
 
 interface UserConfigurationsProps {
-  name?: string;
-  lastName?: string;
-  email?: string;
+  user_name: string;
+  user_lastName: string;
+  email: string;
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const UserConfigurations: React.FC<UserConfigurationsProps> = () => {
-  const { user } = useAuthStore((state) => state); // Obtén los datos del usuario autenticado
-  const [changeName, setChangeName] = useState<string>(user?.name || "");
-  const [changeLastName, setChangeLastname] = useState<string>(user?.lastName || "");
-  const [changeEmail, setChangeEmail] = useState<string>(user?.email || "");
+export const UserConfigurations: React.FC<UserConfigurationsProps> = ({
+  user_name,
+  user_lastName,
+  email,
+  onInputChange,
+}) => {
+  const [changeName, setChangeName] = useState<string>(user_name);
+  const [changeLastName, setChangeLastname] = useState<string>(user_lastName);
+  const [changeEmail, setChangeEmail] = useState<string>(email);
 
   useEffect(() => {
-    // Cuando el componente se monta, se actualizan los campos con los valores del usuario
-    if (user) {
-      setChangeName(user.name || "");
-      setChangeLastname(user.lastName || "");
-      setChangeEmail(user.email || "");
-    }
-  }, [user]);
+    setChangeName(user_name);
+    setChangeLastname(user_lastName);
+    setChangeEmail(email);
+  }, [user_name, user_lastName, email]);
 
   return (
     <div className="flex flex-col md:flex-row mx-auto items-center justify-center bg-white max-w-[342px] p-5">
@@ -37,10 +38,13 @@ export const UserConfigurations: React.FC<UserConfigurationsProps> = () => {
               </label>
               <input
                 type="text"
-                id="name"
+                id="user_name"
                 value={changeName}
                 className="font-poppins font-[400] border-b outline-none focus:ring-0 focus:border-primary p-1 w-full"
-                onChange={(event) => setChangeName(event.target.value)}
+                onChange={(event) => {
+                  setChangeName(event.target.value);
+                  onInputChange(event);
+                }}
               />
             </div>
             <div className="bg-[#FBFBFB] font-[500] w-full max-w-[250px] mb-2">
@@ -52,10 +56,13 @@ export const UserConfigurations: React.FC<UserConfigurationsProps> = () => {
               </label>
               <input
                 type="text"
-                id="lastname"
+                id="user_lastname"
                 value={changeLastName}
                 className="font-poppins font-[400] border-b outline-none focus:ring-0 focus:border-primary p-1 w-full"
-                onChange={(event) => setChangeLastname(event.target.value)}
+                onChange={(event) => {
+                  setChangeLastname(event.target.value);
+                  onInputChange(event);
+                }}
               />
             </div>
             <div className="bg-[#FBFBFB] font-[500] w-full max-w-[250px] mb-2">
@@ -70,7 +77,10 @@ export const UserConfigurations: React.FC<UserConfigurationsProps> = () => {
                 id="email"
                 value={changeEmail}
                 className="font-poppins font-[400] border-b outline-none focus:ring-0 focus:border-primary p-1 w-full"
-                onChange={(event) => setChangeEmail(event.target.value)}
+                onChange={(event) => {
+                  setChangeEmail(event.target.value);
+                  onInputChange(event);
+                }}
               />
             </div>
           </div>
