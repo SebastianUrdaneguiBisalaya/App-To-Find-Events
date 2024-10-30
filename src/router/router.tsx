@@ -11,6 +11,7 @@ import {
   CardDescription,
   Success,
   Cancel,
+  MyFavorites,
 } from "../views";
 import ProtectedRoute from "./ProtectedRoute";
 import { Navigate } from "react-router-dom";
@@ -45,6 +46,14 @@ export const router = createBrowserRouter([
         element: <Cancel />,
       },
       {
+        path: "/eventdescription/:id",
+        element: <CardDescription />,
+      },
+      {
+        path: "/myfavorites",
+        element: <MyFavorites />,
+      },
+      {
         path: "/history",
         element: (
           <ProtectedRoute>
@@ -67,14 +76,6 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <UserInfo />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/eventdescription/:id",
-    element: (
-      <ProtectedRoute>
-        <CardDescription />
       </ProtectedRoute>
     ),
   },

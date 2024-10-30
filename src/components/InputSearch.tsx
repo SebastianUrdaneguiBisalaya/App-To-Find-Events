@@ -46,13 +46,20 @@ export const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
     onSearch(data.startDate, data.endDate, data.searchQuery);
   };
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col sm:flex-row items-center gap-2 p-2 bg-white sm:rounded-full rounded-2xl shadow-lg"
+        className="flex flex-col sm:flex-row items-end gap-2 py-2 px-4 bg-white sm:rounded-full rounded-2xl shadow-lg"
       >
         <div className="w-full sm:w-auto">
+          <label
+            htmlFor="date-start"
+            className="text-[0.7rem]"
+          >
+            Desde:
+          </label>
           <input
+            id="date-start"
             type="date"
             value={startDate}
             // onChange={(e) => setStartDate(e.target.value)}
@@ -62,7 +69,14 @@ export const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
           />
         </div>
         <div className="w-full sm:w-auto">
+          <label
+            htmlFor="date-end"
+            className="text-[0.7rem]"
+          >
+            Hasta:
+          </label>
           <input
+            id="date-end"
             type="date"
             value={endDate}
             // onChange={(e) => setEndDate(e.target.value)}

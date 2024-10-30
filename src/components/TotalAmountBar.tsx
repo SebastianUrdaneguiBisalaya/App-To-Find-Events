@@ -3,6 +3,7 @@ import { Texts } from "./Texts";
 import { useAuthStore } from "../store/AuthStore";
 import { v4 as uuidv4 } from "uuid";
 import { fetchData } from "../services";
+import { useNavigate } from "react-router-dom";
 
 interface PropTotalAmountBar {
   id: string;
@@ -68,9 +69,12 @@ const purchases = (eventTickets: PropTotalAmountBar[], userId: string): Purchase
 export const TotalAmountBar = ({ dataTotalBuy }: DataTotalBuy) => {
   const { user } = useAuthStore((state) => state);
   const res = purchases(dataTotalBuy, user?.id);
+  const navigate = useNavigate();
   const handleCheckout = async () => {
     try {
-      console.log(res);
+      if (!user) {
+        return navigate("/login");
+      }
       const response = await fetchData({
         baseUrl: "http://localhost:3000/payments/checkout",
         options: {
