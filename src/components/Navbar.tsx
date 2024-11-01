@@ -12,8 +12,8 @@ export const NavBar: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleLogout = async () => {
-    await logout();
+  const handleLogout = () => {
+    logout();
     navigate("/login");
   };
 

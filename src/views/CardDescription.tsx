@@ -15,8 +15,8 @@ export interface Tickets {
 export interface EventDetailById {
   event_name: string;
   event_category: string;
-  event_date: Date;
-  event_hour: Date;
+  event_date: string;
+  event_hour: string;
   event_place: string;
   event_latitude: number;
   event_longitude: number;

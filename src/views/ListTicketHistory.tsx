@@ -1,41 +1,84 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PurchaseHistoryCard } from "../components";
 import { Tickets } from "./Tickets";
-
-// type PurchaseHistoryCardProps = {
-//   dateBuy: string;
-//   nameEvent: string;
-//   priceEvent: number;
-//   dateEvent: string;
-//   placeEvent: string;
-//   hourEvent: string;
-//   onClick: () => void;
-// };
-
-type Purchase = {
-  id: string;
-  nameEvent: string;
-  dateEvent: string;
-  placeEvent: string;
-  nameUser: string;
-  orderId: string;
-  dayEvent: string;
-  hourEvent: string;
-  typeTicket: string;
-  quantity: number;
-  barcode: string;
-};
+import { fetchData } from "../services";
+import { useAuthStore } from "../store/AuthStore";
 
 type Order = {
-  dateBuy: string;
-  tickets: Purchase[];
+  order_id: string;
+  order_date: string;
+  event_name: string;
+  event_date: string;
+  event_place: string;
+  event_hour: string;
+  onClickData: {
+    order_date: string;
+    purchases: {
+      ticket_id: string;
+      event_name: string;
+      event_date: string;
+      event_place: string;
+      order_id: string;
+      event_hour: string;
+      ticket_type: string;
+      bar_code: string;
+      purchase_quantity: number;
+    }[];
+  };
 };
 
 export const ListTicketHistory = () => {
-  const [selectedTicket, setSelectedTicket] = useState<Order | null>(null);
-  const handleCardClick = (order: Order) => {
-    setSelectedTicket(order);
+  const [selectedTicket, setSelectedTicket] = useState<{
+    order_date: string;
+    purchases: {
+      ticket_id: string;
+      event_name: string;
+      event_date: string;
+      event_place: string;
+      order_id: string;
+      event_hour: string;
+      ticket_type: string;
+      bar_code: string;
+      purchase_quantity: number;
+    }[];
+  } | null>(null);
+  const [data, setData] = useState<Order[]>([]);
+  const abortControllerRef = useRef<AbortController | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuthStore((state) => state);
+
+  const handleCardClick = (orderData: Order["onClickData"]) => {
+    setSelectedTicket(orderData);
   };
+
+  const fetchHistoryTickets = async () => {
+    try {
+      setIsLoading(true);
+      if (!user) return;
+      const controller = new AbortController();
+      abortControllerRef.current = controller;
+      const result = await fetchData({
+        baseUrl: `http://localhost:3000/userhistoryevents/${user.id}`,
+        signal: controller.signal,
+      });
+      if (result) {
+        setData(result);
+      }
+    } catch (error) {
+      throw new Error(`Unnable to fetch data: ${error}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchHistoryTickets();
+    return () => {
+      if (abortControllerRef.current && isLoading) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
   return (
     <div className="font-poppins max-w-[1500px] mx-auto my-0 px-10 pt-5">
       <div className="flex flex-col lg:flex-row lg:justify-center lg:items-center gap-4">
@@ -45,86 +88,17 @@ export const ListTicketHistory = () => {
         </h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-        <PurchaseHistoryCard
-          dateBuy="2024-12-20"
-          nameEvent="Bruno Mars | Stars 26"
-          dateEvent="2025-01-05"
-          placeEvent="Buenos Aires, Argentina"
-          hourEvent="15:00"
-          onClick={() =>
-            handleCardClick({
-              dateBuy: "2024-12-20",
-              tickets: [
-                {
-                  id: "003",
-                  nameEvent: "Coldplay | Music of the Spheres",
-                  dateEvent: "2025/02/10",
-                  placeEvent: "Lima, Perú",
-                  nameUser: "CARLA RUIZ",
-                  orderId: "002",
-                  dayEvent: "2025/02/10",
-                  hourEvent: "19:00",
-                  typeTicket: "VIP",
-                  barcode: "",
-                  quantity: 1,
-                },
-                {
-                  id: "004",
-                  nameEvent: "Coldplay | Music of the Spheres",
-                  dateEvent: "2025/02/10",
-                  placeEvent: "Lima, Perú",
-                  nameUser: "CARLA RUIZ",
-                  orderId: "002",
-                  dayEvent: "2025/02/10",
-                  hourEvent: "19:00",
-                  typeTicket: "VIP",
-                  barcode: "",
-                  quantity: 1,
-                },
-              ],
-            })
-          }
-        />
-        <PurchaseHistoryCard
-          dateBuy="2024-12-20"
-          nameEvent="Bruno Mars | Stars 25"
-          dateEvent="2025-01-05"
-          placeEvent="Buenos Aires, Argentina"
-          hourEvent="15:00"
-          onClick={() =>
-            handleCardClick({
-              dateBuy: "2024-12-20",
-              tickets: [
-                {
-                  id: "005",
-                  nameEvent: "Coldplay | Music of the Spheres",
-                  dateEvent: "2025/02/10",
-                  placeEvent: "Lima, Perú",
-                  nameUser: "CARLA RUIZ",
-                  orderId: "002",
-                  dayEvent: "2025/02/10",
-                  hourEvent: "19:00",
-                  typeTicket: "VIP",
-                  barcode: "",
-                  quantity: 1,
-                },
-                {
-                  id: "006",
-                  nameEvent: "Coldplayyy | Music of the Spheres",
-                  dateEvent: "2025/02/10",
-                  placeEvent: "Lima, Perú",
-                  nameUser: "CARLA RUIZ",
-                  orderId: "002",
-                  dayEvent: "2025/02/10",
-                  hourEvent: "19:00",
-                  typeTicket: "VIP",
-                  barcode: "",
-                  quantity: 1,
-                },
-              ],
-            })
-          }
-        />
+        {data.map((item) => (
+          <PurchaseHistoryCard
+            key={item.order_id}
+            order_date={item.order_date}
+            event_name={item.event_name}
+            event_date={item.event_date}
+            event_place={item.event_place}
+            event_hour={item.event_hour}
+            onClick={() => handleCardClick(item.onClickData)}
+          />
+        ))}
       </div>
 
       {selectedTicket && (
@@ -150,7 +124,7 @@ export const ListTicketHistory = () => {
               </svg>
             </button>
             <div className="w-96 h-full">
-              <Tickets tickets={selectedTicket.tickets} />
+              <Tickets purchases={selectedTicket.purchases} />
             </div>
           </div>
         </dialog>
