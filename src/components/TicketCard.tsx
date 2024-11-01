@@ -1,3 +1,5 @@
+import { Barcode } from "./barcode";
+
 type TicketCardProps = {
   nameEvent: string;
   dateEvent: string;
@@ -107,11 +109,9 @@ export const TicketCard = ({
         </svg>
       </div>
       <div className="w-full flex flex-col justify-center items-center pt-3">
-        <img
-          className="object-cover w-[17rem] h-[6rem]"
-          src={`${barcode ? barcode : ""}`}
-          alt="Barcode"
-        />
+        <div className="w-[17rem] h-[9rem]">
+          <Barcode code={barcode} />
+        </div>
         <p className="text-xs my-4">Escanea el código de barras</p>
       </div>
     </div>
