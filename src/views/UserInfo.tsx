@@ -141,7 +141,7 @@ export const UserInfo = () => {
                 Ir al Home
               </Link>
               <Button
-                text="Cerrar Sesión"
+                text="Salir"
                 className="w-[15.625rem] h-[3.75rem]"
                 onClick={handleLogout}
               />
@@ -159,19 +159,19 @@ export const UserInfo = () => {
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white rounded-lg p-6 shadow-lg max-w-sm w-full">
-            <h2 className="text-xl font-semibold text-center mb-4">Confirm Deletion</h2>
-            <p className="text-center mb-6">Are you sure you want to delete your account?</p>
+            <h2 className="text-xl font-semibold text-center mb-4">Eliminar cuenta</h2>
+            <p className="text-center mb-6">¿Estás seguro de querer eliminar tu cuenta?</p>
             <div className="flex justify-around">
               <button
                 onClick={handleDeleteUser}
                 className="px-4 py-2 text-primary rounded-[10px] border-2 font-poppins border-primary hover:bg-primary hover:text-white"
               >
-                Confirm
+                Eliminar
               </button>
               <Button
                 onClick={() => setShowDeleteModal(false)}
                 className="px-4 py-2"
-                text="Cancel  "
+                text="Cancelar"
               />
             </div>
           </div>
