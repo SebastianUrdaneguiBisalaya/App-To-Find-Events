@@ -9,3 +9,4 @@ export * from "./UserInfo";
 export * from "./Success";
 export * from "./SuccessVerification";
 export * from "./Cancel";
+export * from "./MyFavorites";

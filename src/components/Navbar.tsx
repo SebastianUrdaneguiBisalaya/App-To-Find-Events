@@ -12,8 +12,8 @@ export const NavBar: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleLogout = async () => {
-    await logout();
+  const handleLogout = () => {
+    logout();
     navigate("/login");
   };
 
@@ -62,9 +62,6 @@ export const NavBar: React.FC = () => {
 
           <div className="flex justify-center items-center flex-1">
             <ul className="flex gap-8 px-10 flex-1 justify-center items-center">
-              <li className="text-sm text-black hover:text-primary font-poppins">
-                <Link to={"/trendingevents"}>Home</Link>
-              </li>
               <li className="text-sm text-black hover:text-primary font-poppins text-center">
                 <Link to={"/eventsthisweek"}>Eventos Esta Semana</Link>
               </li>
@@ -76,6 +73,9 @@ export const NavBar: React.FC = () => {
               </li>
               <li className="text-sm text-black hover:text-primary font-poppins text-center">
                 <Link to={"/userinfo"}>Perfil</Link>
+              </li>
+              <li className="text-sm text-black hover:text-primary font-poppins">
+                <Link to={"/myfavorites"}>Mis favoritos</Link>
               </li>
 
               <li className="flex flex-row justify-center items-center">
@@ -188,6 +188,30 @@ export const NavBar: React.FC = () => {
                 to={"/history"}
               >
                 Historial
+              </Link>
+            </li>
+            <li className="my-4 flex items-center text-lg text-black">
+              <div className="flex items-center">
+                <svg
+                  className="pl-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    fill="#761CBC"
+                    fillRule="evenodd"
+                    d="M3.788 1.314c.988.02 2.085.49 3.214 1.56c1.127-1.067 2.223-1.536 3.21-1.555c1.04-.02 1.918.46 2.536 1.18c1.218 1.42 1.47 3.85-.058 5.377l-.001.001l-4.247 4.208c-.81.802-2.07.802-2.88 0L1.316 7.877C-.217 6.343.032 3.913 1.25 2.491c.617-.72 1.495-1.2 2.537-1.178Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <Link
+                className="text-black hover:text-primary text-sm font-poppins pl-2"
+                to={"/myfavorites"}
+              >
+                Mis favoritos
               </Link>
             </li>
             <li className="my-4 flex items-center text-lg text-black">

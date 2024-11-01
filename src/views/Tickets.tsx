@@ -3,34 +3,32 @@ import { cn } from "../utils";
 import { TicketCard } from "../components";
 
 type TicketCardProps = {
-  id: string;
-  nameEvent: string;
-  dateEvent: string;
-  placeEvent: string;
-  nameUser: string;
-  orderId: string;
-  dayEvent: string;
-  hourEvent: string;
-  typeTicket: string;
-  quantity: number;
-  barcode: string;
+  ticket_id: string;
+  event_name: string;
+  event_date: string;
+  event_place: string;
+  order_id: string;
+  event_hour: string;
+  ticket_type: string;
+  bar_code: string;
+  purchase_quantity: number;
 };
 
 type TicketsArray = {
-  tickets: TicketCardProps[];
+  purchases: TicketCardProps[];
 };
-export const Tickets = ({ tickets }: TicketsArray) => {
+export const Tickets = ({ purchases }: TicketsArray) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
 
   const nextCard = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % tickets.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % purchases.length);
   };
 
   const prevCard = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + tickets.length) % tickets.length);
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + purchases.length) % purchases.length);
   };
 
   return (
@@ -76,25 +74,25 @@ export const Tickets = ({ tickets }: TicketsArray) => {
           className="flex justify-center rounded-2xl w-full"
           ref={cardRef}
         >
-          {tickets.map((card, index) => (
+          {purchases.map((card, index) => (
             <div
-              key={card.id}
+              key={card.ticket_id}
               className={cn(
                 "absolute rounded-2xl shadow-lg transition-all duration-300 ease-in-out",
                 index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0",
               )}
             >
               <TicketCard
-                nameEvent={card.nameEvent}
-                dateEvent={card.dateEvent}
-                placeEvent={card.placeEvent}
-                nameUser={card.nameUser}
-                orderId={card.orderId}
-                dayEvent={card.dayEvent}
-                hourEvent={card.hourEvent}
-                typeTicket={card.typeTicket}
-                quantity={card.quantity}
-                barcode={card.barcode}
+                nameEvent={card.event_name}
+                dateEvent={card.event_date}
+                placeEvent={card.event_place}
+                nameUser={card.event_name}
+                orderId={card.order_id}
+                dayEvent={"Lunes"}
+                hourEvent={card.event_hour}
+                typeTicket={card.ticket_type}
+                quantity={card.purchase_quantity}
+                barcode={card.bar_code}
               />
             </div>
           ))}
