@@ -11,6 +11,7 @@ export const useAuthStore = create<AuthState>()(
         isAuthenticated: false,
         rememberedEmail: null,
         user: null,
+        userId: null,
         login: async (params: LoginRequest) => {
           const controller = new AbortController();
           const response = await AuthService.login(params, controller.signal);

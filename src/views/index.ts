@@ -8,3 +8,4 @@ export * from "./CardDescription";
 export * from "./UserInfo";
 export * from "./Success";
 export * from "./Cancel";
+export * from "./MyFavorites";

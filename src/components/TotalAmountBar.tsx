@@ -2,6 +2,8 @@ import { Button } from "./Button";
 import { Texts } from "./Texts";
 import { useAuthStore } from "../store/AuthStore";
 import { v4 as uuidv4 } from "uuid";
+import { fetchData } from "../services";
+import { useNavigate } from "react-router-dom";
 
 interface PropTotalAmountBar {
   id: string;
@@ -57,7 +59,7 @@ const purchases = (eventTickets: PropTotalAmountBar[], userId: string): Purchase
   });
   return {
     order_id: uuidv4(),
-    event_id: eventTickets[0].ticketId,
+    event_id: eventTickets[0].id,
     user_id: userId,
     totalAmount: totalAmount,
     purchases: purchases,
@@ -67,6 +69,32 @@ const purchases = (eventTickets: PropTotalAmountBar[], userId: string): Purchase
 export const TotalAmountBar = ({ dataTotalBuy }: DataTotalBuy) => {
   const { user } = useAuthStore((state) => state);
   const res = purchases(dataTotalBuy, user?.id);
+  const navigate = useNavigate();
+  const handleCheckout = async () => {
+    try {
+      if (!user) {
+        return navigate("/login");
+      }
+      const response = await fetchData({
+        baseUrl: "http://localhost:3000/payments/checkout",
+        options: {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(res),
+        },
+      });
+      if (response) {
+        const session = response.data.url;
+        window.location = session;
+      } else {
+        throw new Error(`Something wrong`);
+      }
+    } catch (error) {
+      throw new Error(`Something wrong ${error}`);
+    }
+  };
   return (
     <div className="flex min-[300px]:flex-row flex-col justify-start min-[300px]:items-center min-[300px]:justify-between bg-[#F2F2F2] p-3 gap-1">
       <div>
@@ -97,7 +125,7 @@ export const TotalAmountBar = ({ dataTotalBuy }: DataTotalBuy) => {
       <div>
         <Button
           text="Comprar Ticket"
-          onClick={() => console.log("Comprar Ticket", res)}
+          onClick={handleCheckout}
         />
       </div>
     </div>

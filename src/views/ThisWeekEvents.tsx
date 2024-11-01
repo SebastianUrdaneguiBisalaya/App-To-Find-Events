@@ -14,6 +14,7 @@ export const ThisWeekEvents = () => {
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<string | null>(null);
 
   const fetchThisWeekEvents = async (currentOffset: number, resetData = false) => {
     if (loading) return;
@@ -25,8 +26,8 @@ export const ThisWeekEvents = () => {
 
       const baseUrl =
         searchQuery || (startDate && endDate)
-          ? "http://localhost:3000/istrendingevents"
-          : "http://localhost:3000/isthisweekevents";
+          ? "http://localhost:3000/isthisweekevents"
+          : "http://localhost:3000/thisweekevents";
 
       const params = new URLSearchParams({
         limit: "10",
@@ -43,6 +44,8 @@ export const ThisWeekEvents = () => {
         params.append("event_date_start", startDate);
         params.append("event_date_end", endDate);
       }
+
+      if (sortOrder) params.append("sort", sortOrder);
 
       const fetchUrl = `${baseUrl}?${params.toString()}`;
       const response = await fetchData({ baseUrl: fetchUrl, signal: controller.signal });
@@ -64,7 +67,7 @@ export const ThisWeekEvents = () => {
         abortControllerRef.current.abort();
       }
     };
-  }, [offset, hasMore]);
+  }, [offset, hasMore, sortOrder]);
 
   const lastEventElementRef = useInfiniteScroll({
     loading,
@@ -102,6 +105,13 @@ export const ThisWeekEvents = () => {
     }
   }, [searchQuery, startDate, endDate]);
 
+  const handleSortUpByPrice = () => {
+    setSortOrder("asc");
+    setData([]);
+    setOffset(0);
+    setHasMore(true);
+  };
+
   const filteredData =
     selectedCategories.length === 0 ? data : data.filter((item) => selectedCategories.includes(item?.event_category));
 
@@ -115,15 +125,40 @@ export const ThisWeekEvents = () => {
         </h2>
         <div className="flex-1 flex-col items-center justify-end w-full">
           <InputSearch onSearch={handleSearch} />
-          <div className="flex flex-wrap items-center justify-center pt-6 gap-y-3">
-            {categoryTags.map((category, index) => (
-              <CategoryTags
-                key={index}
-                category={category}
-                isSelected={selectedCategories.includes(category)}
-                onClick={toggleCategory}
-              />
-            ))}
+          <div className="flex justify-center items-center">
+            <div className="flex flex-col sm:flex-row justify-between sm:gap-10 items-center">
+              <div className="flex flex-wrap items-center justify-center pt-6 gap-y-3">
+                {categoryTags.map((category, index) => (
+                  <CategoryTags
+                    key={index}
+                    category={category}
+                    isSelected={selectedCategories.includes(category)}
+                    onClick={toggleCategory}
+                  />
+                ))}
+              </div>
+              <div className="flex flex-row justify-end items-center gap-1 pt-2 sm:pt-6">
+                <p className="text-sm font-poppins">Ordenar por Precio</p>
+                <button
+                  className="cursor-pointer flex"
+                  onClick={handleSortUpByPrice}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="#761CBC"
+                      fillRule="evenodd"
+                      d="M16.763 3.289a.75.75 0 0 1 .837.261l3 4a.75.75 0 1 1-1.2.9l-1.65-2.2V20a.75.75 0 1 1-1.5 0V4a.75.75 0 0 1 .513-.711M3.25 8A.75.75 0 0 1 4 7.25h9a.75.75 0 0 1 0 1.5H4A.75.75 0 0 1 3.25 8m2 5a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75m2 5a.75.75 0 0 1 .75-.75h5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
