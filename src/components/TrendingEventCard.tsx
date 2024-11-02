@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/AuthStore";
+import { toggleEventToFavorite } from "../services";
 
 interface TrendingEventCardProps {
   id: string;
@@ -9,15 +12,29 @@ interface TrendingEventCardProps {
   location: string;
   date: string;
   price: string;
+  is_favorite: boolean;
 }
 
 export const TrendingEventCard = React.forwardRef<HTMLAnchorElement, TrendingEventCardProps>(
-  ({ id, imageUrl, artist, eventTitle, location, date, price }, ref) => {
+  ({ id, imageUrl, artist, eventTitle, location, date, price, is_favorite }, ref) => {
+    const navigate = useNavigate();
+    const { user } = useAuthStore((state) => state);
     const dateFormat = new Date(date).toISOString().split("T")[0];
-    const [isFavorite, setIsFavorite] = useState(false);
-    const handleFavoriteEvent = (event: React.MouseEvent) => {
+    const [isFavorite, setIsFavorite] = useState(is_favorite);
+    const handleFavoriteEvent = async (event: React.MouseEvent) => {
       event.preventDefault();
-      setIsFavorite((previousState) => !previousState);
+      if (!user) {
+        navigate("/login");
+        return;
+      }
+      try {
+        const response = await toggleEventToFavorite(id, user.id);
+        if (response.event_id) {
+          setIsFavorite((previousState) => !previousState);
+        }
+      } catch (error) {
+        throw new Error(`Unnable to toggle event to favorite: ${error}`);
+      }
     };
     return (
       <Link
@@ -102,7 +119,7 @@ export const TrendingEventCard = React.forwardRef<HTMLAnchorElement, TrendingEve
             </div>
             <div className="w-[30%] flex flex-col items-center justify-center ml-4 break-words">
               <p className="font-normal text-white text-center text-[10px]">Entradas desde</p>
-              <p className="font-semibold text-base text-white text-center">{price}</p>
+              <p className="font-semibold text-base text-white text-center">{`S/. ${price ? price : ""}`}</p>
             </div>
           </div>
         </div>

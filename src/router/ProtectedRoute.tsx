@@ -8,7 +8,6 @@ type ProtectedRouteProps = {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { isAuthenticated } = useAuthStore((state) => state);
-  console.log(isAuthenticated);
 
   if (!isAuthenticated) {
     return (

@@ -37,7 +37,6 @@ export const UserCard: React.FC<UserCardProps> = ({ name, lastName, email, avata
           }
 
           const result = await response.json();
-          console.log(result);
           setCurrentAvatar(result.result.secure_url);
         } catch (err) {
           console.error(err instanceof Error ? err.message : "An error occurred");

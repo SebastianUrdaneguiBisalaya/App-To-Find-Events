@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../store/AuthStore";
+import { toggleEventToFavorite } from "../../services";
 
 export interface UpcomingEvent {
-  id: number;
+  id: string;
   image: string;
   title: string;
   location: string;
   date: string;
   price: string;
+  is_favorite: boolean;
 }
 
 interface UpcomingEventCardProps {
@@ -15,11 +19,30 @@ interface UpcomingEventCardProps {
 }
 
 export const UpcomingEventCard = React.forwardRef<HTMLAnchorElement, UpcomingEventCardProps>(({ data }, ref) => {
-  const { image, title, location, date, price } = data;
+  const navigate = useNavigate();
+  const { user } = useAuthStore((state) => state);
+  const { image, title, location, date, price, is_favorite } = data;
   const dateFormat = new Date(date).toISOString().split("T")[0];
+  const [isFavorite, setIsFavorite] = useState(is_favorite);
+  const handleFavoriteEvent = async (event: React.MouseEvent) => {
+    event.preventDefault();
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    try {
+      const response = await toggleEventToFavorite(data.id, user.id);
+      if (response.event_id) {
+        setIsFavorite((previousState) => !previousState);
+      }
+    } catch (error) {
+      throw new Error(`Unnable to toggle event to favorite: ${error}`);
+    }
+  };
+
   return (
     <Link
-      className="bg-white min-w-[11rem] md:min-w-[14rem] rounded-xl shadow-xl border-1 p-3"
+      className="relative bg-white min-w-[11rem] md:min-w-[14rem] rounded-xl shadow-xl border-1 p-3"
       to={`/eventdescription/${data.id}`}
       ref={ref}
     >
@@ -28,6 +51,40 @@ export const UpcomingEventCard = React.forwardRef<HTMLAnchorElement, UpcomingEve
         alt={title}
         className="w-full min-h-[6.5rem] md:h-[8rem] rounded-xl"
       />
+      <button
+        className="absolute top-5 right-6 z-30"
+        onClick={handleFavoriteEvent}
+      >
+        {isFavorite ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            viewBox="0 0 14 14"
+          >
+            <path
+              fill="#761CBC"
+              fillRule="evenodd"
+              d="M3.788 1.314c.988.02 2.085.49 3.214 1.56c1.127-1.067 2.223-1.536 3.21-1.555c1.04-.02 1.918.46 2.536 1.18c1.218 1.42 1.47 3.85-.058 5.377l-.001.001l-4.247 4.208c-.81.802-2.07.802-2.88 0L1.316 7.877C-.217 6.343.032 3.913 1.25 2.491c.617-.72 1.495-1.2 2.537-1.178Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            viewBox="0 0 14 14"
+          >
+            <path
+              fill="#FFFFFF"
+              fillRule="evenodd"
+              d="M3.788 1.314c.988.02 2.085.49 3.214 1.56c1.127-1.067 2.223-1.536 3.21-1.555c1.04-.02 1.918.46 2.536 1.18c1.218 1.42 1.47 3.85-.058 5.377l-.001.001l-4.247 4.208c-.81.802-2.07.802-2.88 0L1.316 7.877C-.217 6.343.032 3.913 1.25 2.491c.617-.72 1.495-1.2 2.537-1.178Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        )}
+      </button>
       <div className="mt-2">
         <h3 className="text-base font-semibold">{title}</h3>
         <div className="flex flex-col mt-1 gap-1 text-gray-500 text-sm font-normal">
@@ -74,7 +131,7 @@ export const UpcomingEventCard = React.forwardRef<HTMLAnchorElement, UpcomingEve
               d="m10.904 2.1l9.9 1.414l1.414 9.9l-9.192 9.192a1 1 0 0 1-1.415 0l-9.9-9.9a1 1 0 0 1 0-1.413zm.707 2.122L3.833 12l8.485 8.485l7.779-7.778l-1.061-7.425zm2.122 6.363a2 2 0 1 1 2.828-2.828a2 2 0 0 1-2.828 2.829"
             />
           </svg>
-          <p className="w-[90%]">{price}</p>
+          <p className="w-[90%]">{`S/. ${price ? price : ""}`}</p>
         </div>
       </div>
     </Link>

@@ -56,7 +56,6 @@ export const CardDescription = () => {
   const [ticketsEvent, setTicketEvents] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const abortControllerRef = useRef<AbortController | null>(null);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   const getEventDetailById = async (id: string) => {
     try {
@@ -84,11 +83,6 @@ export const CardDescription = () => {
     }
   };
 
-  const handleFavoriteEvent = (event: React.MouseEvent) => {
-    event.preventDefault();
-    setIsFavorite((previousState) => !previousState);
-  };
-
   useEffect(() => {
     if (id) {
       getEventDetailById(id);
@@ -110,40 +104,6 @@ export const CardDescription = () => {
               alt="Image"
               className="w-full h-auto rounded-lg"
             />
-            <button
-              className="absolute top-2 right-2 z-30"
-              onClick={handleFavoriteEvent}
-            >
-              {isFavorite ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  viewBox="0 0 14 14"
-                >
-                  <path
-                    fill="#761CBC"
-                    fillRule="evenodd"
-                    d="M3.788 1.314c.988.02 2.085.49 3.214 1.56c1.127-1.067 2.223-1.536 3.21-1.555c1.04-.02 1.918.46 2.536 1.18c1.218 1.42 1.47 3.85-.058 5.377l-.001.001l-4.247 4.208c-.81.802-2.07.802-2.88 0L1.316 7.877C-.217 6.343.032 3.913 1.25 2.491c.617-.72 1.495-1.2 2.537-1.178Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  viewBox="0 0 14 14"
-                >
-                  <path
-                    fill="#FFFFFF"
-                    fillRule="evenodd"
-                    d="M3.788 1.314c.988.02 2.085.49 3.214 1.56c1.127-1.067 2.223-1.536 3.21-1.555c1.04-.02 1.918.46 2.536 1.18c1.218 1.42 1.47 3.85-.058 5.377l-.001.001l-4.247 4.208c-.81.802-2.07.802-2.88 0L1.316 7.877C-.217 6.343.032 3.913 1.25 2.491c.617-.72 1.495-1.2 2.537-1.178Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              )}
-            </button>
             <div className="inset-x-0 top-[30%] md:top-[1/3] flex justify-center transform -translate-y-1/3">
               <MainDetailsCard
                 artist={eventDescription?.event_artist}

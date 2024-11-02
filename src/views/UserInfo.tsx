@@ -40,15 +40,8 @@ export const UserInfo = () => {
   };
 
   const handleSaveChanges = async () => {
-    console.log(updatedUser);
     if (updatedUser && user?.id) {
       try {
-        // const cookieValue = document.cookie
-        //   .split("; ")
-        //   .find((row) => row.startsWith("token="))
-        //   ?.split("=")[1];
-        // console.log(cookieValue);
-
         const response = await fetch(`http://localhost:3000/users/${user?.id}`, {
           method: "PUT",
           headers: {

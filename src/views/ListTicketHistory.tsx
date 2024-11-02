@@ -99,6 +99,14 @@ export const ListTicketHistory = () => {
             onClick={() => handleCardClick(item.onClickData)}
           />
         ))}
+        {isLoading &&
+          Array.from({ length: 10 }).map((_, index) => (
+            <div
+              role="status"
+              key={`loading-${index}`}
+              className="relative md:min-w-[15rem] h-52 flex items-center justify-center p-4 bg-gray-300 animate-pulse rounded-lg"
+            ></div>
+          ))}
       </div>
 
       {selectedTicket && (

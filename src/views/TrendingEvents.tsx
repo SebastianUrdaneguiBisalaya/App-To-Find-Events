@@ -2,6 +2,7 @@ import { InputSearch, CategoryTags, TrendingEventCard } from "../components";
 import { useEffect, useRef, useState } from "react";
 import { fetchData } from "../services";
 import { useInfiniteScroll } from "../hooks";
+import { useAuthStore } from "../store/AuthStore";
 
 export const TrendingEvents = () => {
   const [data, setData] = useState<Array<any>>([]);
@@ -14,6 +15,7 @@ export const TrendingEvents = () => {
   const [endDate, setEndDate] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string | null>(null);
+  const { user } = useAuthStore((state) => state);
 
   const fetchTrendingEvents = async (currentOffset: number, resetData = false) => {
     if (loading) return;
@@ -45,6 +47,8 @@ export const TrendingEvents = () => {
       }
 
       if (sortOrder) params.append("sort", sortOrder);
+
+      if (user) params.append("user_id", user.id);
 
       const fetchUrl = `${baseUrl}?${params.toString()}`;
       const response = await fetchData({ baseUrl: fetchUrl, signal: controller.signal });
@@ -177,6 +181,7 @@ export const TrendingEvents = () => {
               location={item?.event_place}
               date={item?.event_date}
               price={item?.event_price}
+              is_favorite={item?.is_favorite}
             />
           ))}
         {loading &&
