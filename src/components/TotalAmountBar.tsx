@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import { fetchData } from "../services";
 import { useNavigate } from "react-router-dom";
 
+import { API_BASE_URL } from "../constants/constants";
+
 interface PropTotalAmountBar {
   id: string;
   product: string;
@@ -76,12 +78,13 @@ export const TotalAmountBar = ({ dataTotalBuy }: DataTotalBuy) => {
         return navigate("/login");
       }
       const response = await fetchData({
-        baseUrl: "http://localhost:3000/payments/checkout",
+        baseUrl: `${API_BASE_URL}/payments/checkout`,
         options: {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify(res),
         },
       });

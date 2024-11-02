@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { API_BASE_URL } from "../constants/constants";
 interface UserCardProps {
   name: string;
   lastName: string;
@@ -27,9 +27,10 @@ export const UserCard: React.FC<UserCardProps> = ({ name, lastName, email, avata
         }
 
         try {
-          const response = await fetch("http://localhost:3000/upload", {
+          const response = await fetch(`${API_BASE_URL}/upload`, {
             method: "POST",
             body: formData,
+            credentials: "include",
           });
 
           if (!response.ok) {
