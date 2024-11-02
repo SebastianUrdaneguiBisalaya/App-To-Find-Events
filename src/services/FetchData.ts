@@ -1,10 +1,9 @@
+import { API_BASE_URL } from "../constants/constants";
 type FetchData = {
   baseUrl: string;
   signal?: AbortSignal;
   options?: Record<string, any>;
 };
-
-const BASE_URL = "http://localhost:3000";
 
 export const fetchData = async ({ baseUrl, signal, options }: FetchData) => {
   try {
@@ -49,7 +48,7 @@ export const fetchDataPost = async ({ baseUrl, signal, options }: FetchData) => 
 
 export const fetchUserById = async (userId: string) => {
   try {
-    const response = await fetch(`${BASE_URL}/users/${userId}`, {
+    const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
       headers: {
         "Content-Type": "application/json",
       },
