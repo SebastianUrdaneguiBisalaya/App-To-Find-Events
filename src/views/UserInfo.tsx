@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../constants/constants";
 import { Button, UserCard, UserConfigurations } from "../components";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -70,7 +71,7 @@ export const UserInfo = () => {
   const handleDeleteUser = async () => {
     if (user?.id) {
       try {
-        const response = await fetch(`http://localhost:3000/users/${user?.id}`, {
+        const response = await fetch(`${API_BASE_URL}/users/${user?.id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -159,7 +160,7 @@ export const UserInfo = () => {
                 onClick={handleDeleteUser}
                 className="px-4 py-2 text-primary rounded-[10px] border-2 font-poppins border-primary hover:bg-primary hover:text-white"
               >
-                Eliminar
+                Proceder
               </button>
               <Button
                 onClick={() => setShowDeleteModal(false)}

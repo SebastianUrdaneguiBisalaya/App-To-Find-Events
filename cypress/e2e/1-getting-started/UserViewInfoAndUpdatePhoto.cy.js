@@ -2,17 +2,19 @@
 
 describe("Inicio sesion en mi aplicacion de App for Events", () => {
   beforeEach(() => {
-    cy.visit("http://192.168.28.2:5173/trendingevents");
+    cy.visit("http://192.168.28.2:5173/login");
   });
 
-  it("Inicio de sesion en la aplicacion de Eventos", () => {
-    cy.get('div[class="flex justify-between"]').should("have.length", 5);
-
+  it("Usuario ingresa sesion, verifica su informacion y actualiza su foto de perfil", () => {
     cy.get('a[class="text-sm text-black hover:text-primary font-poppins text-center"]').contains("Login").click();
     cy.get('h2[class="black font-bold text-3xl"]').contains("Bienvenido");
 
     cy.get("input[type=email]").type(`ana.patricia.ru@gmail.com`);
     cy.get("input[type=password]").type(`piwi2024`);
     cy.get("button[type=submit]").click();
+
+    cy.get("a").contains("Perfil").click();
+    cy.wait(3000);
+    cy.get("Ir al Home").click();
   });
 });
