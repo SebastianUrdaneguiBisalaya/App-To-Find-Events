@@ -6,7 +6,6 @@ describe("Inicio sesion en mi aplicacion de App for Events", () => {
   });
 
   it("Usuario ingresa sesion, verifica su informacion y actualiza su foto de perfil", () => {
-    cy.get('a[class="text-sm text-black hover:text-primary font-poppins text-center"]').contains("Login").click();
     cy.get('h2[class="black font-bold text-3xl"]').contains("Bienvenido");
 
     cy.get("input[type=email]").type(`ana.patricia.ru@gmail.com`);
