@@ -14,5 +14,7 @@ describe("Inicio sesion en mi aplicacion de App for Events", () => {
     cy.get("input[type=email]").type(`ana.patricia.ru@gmail.com`);
     cy.get("input[type=password]").type(`piwi2024`);
     cy.get("button[type=submit]").click();
+    cy.wait(3000);
+    cy.get("a").contains("Logout").click();
   });
 });
