@@ -6,7 +6,7 @@ export const NavBar: React.FC = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
-  const { user, logout } = useAuthStore((state) => state);
+  const { isAuthenticated, logout } = useAuthStore((state) => state);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -79,7 +79,7 @@ export const NavBar: React.FC = () => {
               </li>
 
               <li className="flex flex-row justify-center items-center">
-                {user ? (
+                {isAuthenticated ? (
                   <button
                     className="text-sm text-black hover:text-primary font-poppins text-center"
                     onClick={handleLogout}
@@ -247,7 +247,7 @@ export const NavBar: React.FC = () => {
                 />
               </svg>
               <div className="flex flex-row">
-                {user ? (
+                {isAuthenticated ? (
                   <button
                     className="text-sm text-black hover:text-primary font-poppins text-center"
                     onClick={handleLogout}

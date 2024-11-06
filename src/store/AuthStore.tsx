@@ -30,7 +30,7 @@ export const useAuthStore = create<AuthState>()(
           if (response.error) {
             set({ user: null, isAuthenticated: false });
           }
-          set({ isAuthenticated: true, user: response.data });
+          set({ isAuthenticated: false, user: response.data });
           return {
             response,
             abort: () => controller.abort(),
