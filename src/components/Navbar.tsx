@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuthStore } from "../store/AuthStore";
 
 export const NavBar: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
   const { isAuthenticated, logout } = useAuthStore((state) => state);
@@ -16,6 +17,8 @@ export const NavBar: React.FC = () => {
     logout();
     navigate("/login");
   };
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <div className="md:flex md:justify-center md:items-center font-poppins">
@@ -62,21 +65,23 @@ export const NavBar: React.FC = () => {
 
           <div className="flex justify-center items-center flex-1">
             <ul className="flex gap-8 px-10 flex-1 justify-center items-center">
-              <li className="text-sm text-black hover:text-primary font-poppins text-center">
-                <Link to={"/eventsthisweek"}>Eventos Esta Semana</Link>
-              </li>
-              <li className="text-sm text-black hover:text-primary font-poppins text-center">
-                <Link to={"/upcomingevents"}>Próximos Eventos</Link>
-              </li>
-              <li className="text-sm text-black hover:text-primary font-poppins text-center">
-                <Link to={"/history"}>Historial</Link>
-              </li>
-              <li className="text-sm text-black hover:text-primary font-poppins text-center">
-                <Link to={"/userinfo"}>Perfil</Link>
-              </li>
-              <li className="text-sm text-black hover:text-primary font-poppins">
-                <Link to={"/myfavorites"}>Mis favoritos</Link>
-              </li>
+              {["/eventsthisweek", "/upcomingevents", "/history", "/userinfo", "/myfavorites"].map((path) => (
+                <li
+                  key={path}
+                  className={`text-sm text-black font-poppins text-center  ${isActive(path) ? "font-bold text-primary" : ""} `}
+                >
+                  <Link
+                    to={path}
+                    className="hover:text-primary rounded "
+                  >
+                    {path === "/eventsthisweek" && "Eventos Esta Semana"}
+                    {path === "/upcomingevents" && "Próximos Eventos"}
+                    {path === "/history" && "Historial"}
+                    {path === "/userinfo" && "Perfil"}
+                    {path === "/myfavorites" && "Mis favoritos"}
+                  </Link>
+                </li>
+              ))}
 
               <li className="flex flex-row justify-center items-center">
                 {isAuthenticated ? (
@@ -89,13 +94,13 @@ export const NavBar: React.FC = () => {
                 ) : (
                   <>
                     <Link
-                      className="text-sm text-black hover:text-primary font-poppins text-center"
+                      className={`text-sm text-black font-poppins text-center  ${isActive("/login") ? "font-bold text-primary" : ""} `}
                       to={"/login"}
                     >
                       Login/
                     </Link>
                     <Link
-                      className="text-sm text-black hover:text-primary font-poppins text-center"
+                      className={`text-sm text-black font-poppins text-center  ${isActive("/signup") ? "font-bold text-primary" : ""} `}
                       to={"/signup"}
                     >
                       Sign Up
@@ -126,7 +131,9 @@ export const NavBar: React.FC = () => {
             </Link>
           </div>
           <ul>
-            <li className="my-4 flex items-center text-lg text-black">
+            <li
+              className={`my-4 flex items-center text-lg text-black ${isActive("/eventsthisweek") ? "font-bold text-primary" : ""}`}
+            >
               <svg
                 className="p-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +154,9 @@ export const NavBar: React.FC = () => {
                 Eventos Esta Semana
               </Link>
             </li>
-            <li className="my-4 flex items-center text-lg text-black">
+            <li
+              className={`my-4 flex items-center text-lg text-black ${isActive("/upcomingevents") ? "font-bold text-primary" : ""}`}
+            >
               <svg
                 className="p-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +179,9 @@ export const NavBar: React.FC = () => {
                 Próximos Eventos
               </Link>
             </li>
-            <li className="my-4 flex items-center text-lg text-black">
+            <li
+              className={`my-4 flex items-center text-lg text-black ${isActive("/history") ? "font-bold text-primary" : ""}`}
+            >
               <svg
                 className="p-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -190,7 +201,9 @@ export const NavBar: React.FC = () => {
                 Historial
               </Link>
             </li>
-            <li className="my-4 flex items-center text-lg text-black">
+            <li
+              className={`my-4 flex items-center text-lg text-black ${isActive("/myfavorites") ? "font-bold text-primary" : ""}`}
+            >
               <div className="flex items-center">
                 <svg
                   className="pl-1"
@@ -214,7 +227,9 @@ export const NavBar: React.FC = () => {
                 Mis favoritos
               </Link>
             </li>
-            <li className="my-4 flex items-center text-lg text-black">
+            <li
+              className={`my-4 flex items-center text-lg text-black ${isActive("/userinfo") ? "font-bold text-primary" : ""}`}
+            >
               <svg
                 className="p-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -257,13 +272,13 @@ export const NavBar: React.FC = () => {
                 ) : (
                   <>
                     <Link
-                      className="text-sm text-black hover:text-primary font-poppins text-center"
+                      className={`text-sm items-center text-black ${isActive("/login") ? "font-bold text-primary" : ""}`}
                       to={"/login"}
                     >
                       Login/
                     </Link>
                     <Link
-                      className="text-sm text-black hover:text-primary font-poppins text-center"
+                      className={`text-sm items-center text-black ${isActive("/signup") ? "font-bold text-primary" : ""}`}
                       to={"/signup"}
                     >
                       Sign Up
