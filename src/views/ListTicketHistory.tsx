@@ -60,6 +60,9 @@ export const ListTicketHistory = () => {
       const result = await fetchData({
         baseUrl: `http://localhost:3000/userhistoryevents/${user.id}`,
         signal: controller.signal,
+        options: {
+          credentials: "include",
+        },
       });
       if (result) {
         setData(result);

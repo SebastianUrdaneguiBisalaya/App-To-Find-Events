@@ -12,9 +12,6 @@ type InputSearchProps = {
 };
 
 export const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
-  // const [startDate, setStartDate] = useState("");
-  // const [endDate, setEndDate] = useState("");
-  // const [searchQuery, setSearchQuery] = useState("");
   const {
     register,
     handleSubmit,
@@ -37,11 +34,6 @@ export const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
     return true;
   };
 
-  // const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   onSearch(startDate, endDate, searchQuery);
-  // };
-
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     onSearch(data.startDate, data.endDate, data.searchQuery);
   };
@@ -62,7 +54,6 @@ export const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
             id="date-start"
             type="date"
             value={startDate}
-            // onChange={(e) => setStartDate(e.target.value)}
             {...register("startDate", { validate: validateDates })}
             className="w-full sm:w-[10rem] px-3 py-2 rounded-full border border-gray-300 focus:outline-none focus_ring-2 focus:ring-primary text-sm"
             placeholder="Fecha inicio"
@@ -79,7 +70,6 @@ export const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
             id="date-end"
             type="date"
             value={endDate}
-            // onChange={(e) => setEndDate(e.target.value)}
             {...register("endDate", { validate: validateDates })}
             className="w-full sm:w-[10rem] px-3 py-2 rounded-full border border-gray-300 focus:outline-none focus_ring-2 focus:ring-primary text-sm"
             placeholder="Fecha fin"
@@ -87,7 +77,6 @@ export const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
         </div>
         <input
           type="text"
-          // onChange={(e) => setSearchQuery(e.target.value)}
           {...register("searchQuery")}
           placeholder="Buscar eventos"
           className="w-full sm:flex-grow px-4 py-2 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary text-sm"

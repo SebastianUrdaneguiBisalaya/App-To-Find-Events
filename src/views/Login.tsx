@@ -9,7 +9,7 @@ import { LoginFormFields, LoginSchema } from "../schema/Login.schema";
 export const Login: React.FC = () => {
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
-  const { login, getRememberedEmail, setRememberedEmail, user } = useAuthStore((state) => state);
+  const { login, getRememberedEmail, setRememberedEmail, isAuthenticated } = useAuthStore((state) => state);
 
   const {
     register,
@@ -25,7 +25,7 @@ export const Login: React.FC = () => {
   });
 
   useEffect(() => {
-    if (user) {
+    if (isAuthenticated) {
       navigate("/");
     }
   });

@@ -39,11 +39,11 @@ export const router = createBrowserRouter([
         element: <UpcomingEvents />,
       },
       {
-        path: "/success",
+        path: "/payments/success",
         element: <Success />,
       },
       {
-        path: "/cancel",
+        path: "/payments/cancel",
         element: <Cancel />,
       },
       {
@@ -56,7 +56,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/myfavorites",
-        element: <MyFavorites />,
+        element: (
+          <ProtectedRoute>
+            <MyFavorites />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/history",

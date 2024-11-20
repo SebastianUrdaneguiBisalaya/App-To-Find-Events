@@ -83,6 +83,7 @@ export const TotalAmountBar = ({ dataTotalBuy }: DataTotalBuy) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(res),
+          credentials: "include",
         },
       });
       if (response) {

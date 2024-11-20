@@ -28,6 +28,9 @@ export const MyFavorites = () => {
       const result = await fetchData({
         baseUrl: `http://localhost:3000/myfavoritevents/${user.id}`,
         signal: controller.signal,
+        options: {
+          credentials: "include",
+        },
       });
       setData(result);
     } catch (error) {

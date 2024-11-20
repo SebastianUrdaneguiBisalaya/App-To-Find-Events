@@ -43,13 +43,6 @@ export const NavBar: React.FC = () => {
             />
           </svg>
         </button>
-
-        {/* <div className="flex justify-center items-center mr-4 relative">
-          <span className="absolute top-[0.6rem] right-[0.05rem] bg-red-500 text-white rounded-full text-xs px-1">
-            2
-          </span>
-          <BuyTickets />
-        </div> */}
       </div>
 
       <div className="hidden md:flex md:justify-center md:items-center md:bg-white md:shadow-lg max-w-[64rem] md:px-6 md:h-[4.5rem] sm:rounded-full rounded-2xl md:mt-4 md:mx-2">

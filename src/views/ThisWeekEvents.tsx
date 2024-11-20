@@ -178,6 +178,7 @@ export const ThisWeekEvents = () => {
               location={item?.event_place}
               date={item?.event_date}
               price={item?.event_price}
+              is_favorite={item?.is_favorite}
             />
           ))}
         {loading &&

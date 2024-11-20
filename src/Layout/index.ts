@@ -1,2 +1,1 @@
-export * from "./BuyTickets";
-export * from "./BuyTickets";
+export * from "./ShoppingCart";

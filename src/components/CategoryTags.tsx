@@ -18,8 +18,6 @@ export const CategoryTags: React.FC<CategoryTagsProps> = ({ category, onClick, i
   return (
     <button
       className={`inline-block mx-1 px-3 py-1 rounded-lg font-poppins font-normal text-sm cursor-pointer ${normal} ${isSelected && hover}`}
-      // onMouseEnter={(e) => e.currentTarget.classList.replace(normal, hover)}
-      // onMouseLeave={(e) => e.currentTarget.classList.replace(hover, normal)}
       onClick={() => onClick(category)}
     >
       {category}

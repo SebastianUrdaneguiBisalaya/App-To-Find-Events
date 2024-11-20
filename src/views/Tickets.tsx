@@ -76,7 +76,7 @@ export const Tickets = ({ purchases }: TicketsArray) => {
         >
           {purchases.map((card, index) => (
             <div
-              key={card.ticket_id}
+              key={`${card.ticket_id}-${card.bar_code}`}
               className={cn(
                 "absolute rounded-2xl shadow-lg transition-all duration-300 ease-in-out",
                 index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0",
