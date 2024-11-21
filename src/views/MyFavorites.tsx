@@ -25,14 +25,14 @@ export const MyFavorites = () => {
       setIsLoading(true);
       const controller = new AbortController();
       abortController.current = controller;
-      const result = await fetchData({
+      const res = await fetchData({
         baseUrl: `${import.meta.env.VITE_API_EVENT_FAVORITES}/${user.id}`,
         signal: controller.signal,
         options: {
           credentials: "include",
         },
       });
-      setData(result);
+      setData(res);
     } catch (error) {
       throw new Error(`Unnable to fetch data: ${error}`);
     } finally {
