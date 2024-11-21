@@ -24,6 +24,9 @@
     <a href="https://alexamibco.atlassian.net/jira/software/projects/EVENT/boards/67/timeline?shared=&atlOrigin=eyJpIjoiYzM0NDc1YWU0Y2Q1NGJkMzkzZWJhYjM4NDdjNWFlNzUiLCJwIjoiaiJ9">
         <img src="https://img.icons8.com/color/32/000000/jira.png" alt="Jira Link" />
     </a>
+    <a href="https://github.com/SebastianUrdaneguiBisalaya/App-To-Find-Events-Backend">
+        <img src="https://img.icons8.com/color/32/000000/nodejs.png" alt="Backend Link" />
+    </a>
 </p>
 
 <div>
