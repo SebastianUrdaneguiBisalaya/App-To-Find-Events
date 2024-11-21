@@ -76,7 +76,7 @@ export const TotalAmountBar = ({ dataTotalBuy }: DataTotalBuy) => {
         return navigate("/login");
       }
       const response = await fetchData({
-        baseUrl: "http://localhost:3000/payments/checkout",
+        baseUrl: `${import.meta.env.VITE_API_PAYMENTS_CHECKOUT}`,
         options: {
           method: "POST",
           headers: {

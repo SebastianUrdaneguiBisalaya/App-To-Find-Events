@@ -62,7 +62,10 @@ export const CardDescription = () => {
       setIsLoading(true);
       const controller = new AbortController();
       abortControllerRef.current = controller;
-      const result = await fetchData({ baseUrl: `http://localhost:3000/eventdetail/${id}`, signal: controller.signal });
+      const result = await fetchData({
+        baseUrl: `${import.meta.env.VITE_API_EVENT_DETAIL}/${id}`,
+        signal: controller.signal,
+      });
       if (result) {
         setEventDescription(result);
         const ticketsFormat = result.tickets.map((item: CartItemAPI) => ({

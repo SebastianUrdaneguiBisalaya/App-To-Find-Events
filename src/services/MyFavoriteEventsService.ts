@@ -1,4 +1,3 @@
-import { API_BASE_URL } from "../constants/constants";
 import { fetchDataPost } from "./FetchData";
 
 export interface FavoriteEvents {
@@ -14,7 +13,7 @@ export const toggleEventToFavorite = async (
   signal?: AbortSignal,
 ): Promise<FavoriteEvents> => {
   const response = await fetchDataPost({
-    baseUrl: `${API_BASE_URL}/toggle-favorite-events`,
+    baseUrl: `${import.meta.env.VITE_API_TOGGLE_EVENT_FAVORITES}`,
     signal,
     options: {
       method: "POST",

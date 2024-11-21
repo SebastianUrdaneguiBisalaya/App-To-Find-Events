@@ -42,7 +42,7 @@ export const UserInfo = () => {
   const handleSaveChanges = async () => {
     if (updatedUser && user?.id) {
       try {
-        const response = await fetch(`http://localhost:3000/users/${user?.id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_GET_INFO_USER}/${user?.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export const UserInfo = () => {
   const handleDeleteUser = async () => {
     if (user?.id) {
       try {
-        const response = await fetch(`http://localhost:3000/users/${user?.id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_GET_INFO_USER}/${user?.id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

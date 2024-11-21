@@ -4,7 +4,7 @@ type FetchData = {
   options?: Record<string, any>;
 };
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = `${import.meta.env.VITE_URL_SERVER}`;
 
 export const fetchData = async ({ baseUrl, signal, options }: FetchData) => {
   try {

@@ -27,8 +27,8 @@ export const TrendingEvents = () => {
 
       const baseUrl =
         searchQuery || (startDate && endDate)
-          ? "http://localhost:3000/istrendingevents"
-          : "http://localhost:3000/trendingEvents";
+          ? `${import.meta.env.VITE_API_IS_TRENDING_EVENTS}`
+          : `${import.meta.env.VITE_API_TRENDING_EVENTS}`;
 
       const params = new URLSearchParams({
         limit: "10",

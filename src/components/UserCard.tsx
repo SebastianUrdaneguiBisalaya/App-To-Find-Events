@@ -27,7 +27,7 @@ export const UserCard: React.FC<UserCardProps> = ({ name, lastName, email, avata
         }
 
         try {
-          const response = await fetch("http://localhost:3000/upload", {
+          const response = await fetch(`${import.meta.env.VITE_API_UPLOAD_IMAGE}`, {
             method: "POST",
             body: formData,
           });

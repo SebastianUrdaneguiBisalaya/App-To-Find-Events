@@ -26,7 +26,7 @@ export const MyFavorites = () => {
       const controller = new AbortController();
       abortController.current = controller;
       const result = await fetchData({
-        baseUrl: `http://localhost:3000/myfavoritevents/${user.id}`,
+        baseUrl: `${import.meta.env.VITE_API_EVENT_FAVORITES}/${user.id}`,
         signal: controller.signal,
         options: {
           credentials: "include",

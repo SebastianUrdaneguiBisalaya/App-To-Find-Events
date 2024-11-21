@@ -28,8 +28,8 @@ export const UpcomingEvents = () => {
 
       const baseUrl =
         searchQuery || (startDate && endDate)
-          ? "http://localhost:3000/isupcomingevents"
-          : "http://localhost:3000/upcomingevents";
+          ? `${import.meta.env.VITE_API_IS_UPCOMING_EVENTS}`
+          : `${import.meta.env.VITE_API_UPCOMING_EVENTS}`;
 
       const params = new URLSearchParams({
         limit: "10",

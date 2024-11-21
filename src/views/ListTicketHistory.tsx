@@ -58,7 +58,7 @@ export const ListTicketHistory = () => {
       const controller = new AbortController();
       abortControllerRef.current = controller;
       const result = await fetchData({
-        baseUrl: `http://localhost:3000/userhistoryevents/${user.id}`,
+        baseUrl: `${import.meta.env.VITE_API_EVENT_HISTORY}/${user.id}`,
         signal: controller.signal,
         options: {
           credentials: "include",

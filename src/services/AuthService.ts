@@ -1,4 +1,3 @@
-import { API_BASE_URL } from "../constants/constants";
 import {
   LoginRequest,
   LoginResponse,
@@ -10,7 +9,7 @@ import { fetchDataPost } from "./FetchData";
 
 export const login = async (params: LoginRequest, signal?: AbortSignal): Promise<ResponseApi<LoginResponse>> => {
   const response = await fetchDataPost({
-    baseUrl: `${API_BASE_URL}/auth/login`,
+    baseUrl: `${import.meta.env.VITE_API_LOGIN}`,
     signal,
     options: {
       method: "POST",
@@ -23,7 +22,7 @@ export const login = async (params: LoginRequest, signal?: AbortSignal): Promise
 
 export const logout = async (): Promise<ResponseApi<LoginResponse>> => {
   const response = await fetchDataPost({
-    baseUrl: `${API_BASE_URL}/auth/logout`,
+    baseUrl: `${import.meta.env.VITE_API_LOGOUT}`,
     options: {
       method: "POST",
       credentials: "include",
@@ -32,16 +31,9 @@ export const logout = async (): Promise<ResponseApi<LoginResponse>> => {
   return response;
 };
 
-export const getUser = () => {
-  const response = fetch(`${API_BASE_URL}/users/b232305e-777b-46c1-b5d1-180be250f462`, {
-    credentials: "include",
-  });
-  return response;
-};
-
 export const signUp = async (params: SignUpRequest, signal?: AbortSignal): Promise<ResponseApi<SignUpResponse>> => {
   const response = await fetchDataPost({
-    baseUrl: `${API_BASE_URL}/auth/sign-up`,
+    baseUrl: `${import.meta.env.VITE_API_SIGNUP}`,
     signal,
     options: {
       method: "POST",

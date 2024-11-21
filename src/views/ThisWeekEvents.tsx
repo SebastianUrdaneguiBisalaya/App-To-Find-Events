@@ -26,8 +26,8 @@ export const ThisWeekEvents = () => {
 
       const baseUrl =
         searchQuery || (startDate && endDate)
-          ? "http://localhost:3000/isthisweekevents"
-          : "http://localhost:3000/thisweekevents";
+          ? `${import.meta.env.VITE_API_IS_THIS_WEEK_EVENTS}`
+          : `${import.meta.env.VITE_API_THIS_WEEK_EVENTS}`;
 
       const params = new URLSearchParams({
         limit: "10",
