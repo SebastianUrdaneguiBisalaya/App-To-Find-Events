@@ -1,6 +1,6 @@
-<div style="text-align: center;">
-    <img style="height:70px" src="./img/ExploryQ.png"/>
-</div>
+<p align="center">
+    <img src="./img/ExploryQ.png" alt="ExploryQ Logo" height="70">
+</p>
 
 <div style="text-align: center;">
     <h2>Frontend Repository</h2>
