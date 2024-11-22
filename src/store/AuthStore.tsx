@@ -17,6 +17,7 @@ export const useAuthStore = create<AuthState>()(
           const response = await AuthService.login(params, controller.signal);
           if (response.error) {
             set({ user: null, isAuthenticated: false });
+            throw new Error(response.error.message);
           }
           set({ isAuthenticated: true, user: response.data });
           return {
@@ -29,6 +30,7 @@ export const useAuthStore = create<AuthState>()(
           const response = await AuthService.signUp(params, controller.signal);
           if (response.error) {
             set({ user: null, isAuthenticated: false });
+            throw new Error(response.error.message);
           }
           set({ isAuthenticated: false, user: response.data });
           return {
