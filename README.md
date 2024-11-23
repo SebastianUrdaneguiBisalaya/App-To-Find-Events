@@ -118,12 +118,12 @@ We have developed a platform (website) that allows users to view different event
 
 ##### Screen 7: Favorite Events
 
-![UserFeature/Favorites](./img/login.png)
+![UserFeature/Favorites](./img/favorites.png)
 
 ##### Screen 8: History Tickets
 
-![UserFeature/HistoryTickets](./img/login.png)
+![UserFeature/HistoryTickets](./img/history.png)
 
 ##### Screen 9: User Profile
 
-![Auth/Profile](./img/login.png)
+![Auth/Profile](./img/profile.png)
