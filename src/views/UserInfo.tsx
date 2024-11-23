@@ -18,7 +18,6 @@ export const UserInfo = () => {
   const [updatedUser, setUpdatedUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -64,10 +63,8 @@ export const UserInfo = () => {
   };
 
   const handleLogout = async () => {
-    setIsLoading(true);
     await logout();
     window.location.reload();
-    setIsLoading(false);
   };
 
   const handleDeleteUser = async () => {
@@ -137,7 +134,7 @@ export const UserInfo = () => {
                 Ir al Home
               </Link>
               <Button
-                text={isLoading ? "Cargando..." : "Salir"}
+                text="Salir"
                 className="w-[15.625rem] h-[3.75rem]"
                 onClick={handleLogout}
               />
