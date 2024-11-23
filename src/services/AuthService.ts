@@ -17,7 +17,6 @@ export const login = async (params: LoginRequest, signal?: AbortSignal): Promise
       credentials: "include",
     },
   });
-  console.log(response);
   return response;
 };
 

@@ -8,6 +8,7 @@ import { LoginFormFields, LoginSchema } from "../schema/Login.schema";
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const { login, getRememberedEmail, setRememberedEmail, isAuthenticated } = useAuthStore((state) => state);
 
@@ -40,6 +41,7 @@ export const Login: React.FC = () => {
 
   const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
     try {
+      setIsLoading(true);
       const { response } = await login({ email: data.email, password: data.password });
       if (response?.error) {
         setError(response.error.message);
@@ -53,6 +55,8 @@ export const Login: React.FC = () => {
       }
     } catch (err: any) {
       setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -105,7 +109,7 @@ export const Login: React.FC = () => {
                 />
                 {error && <span className="text-red-500 text-sm text-center">{error}</span>}
                 <Button
-                  text="Iniciar sesión"
+                  text={isLoading ? "Cargando..." : "Iniciar sesión"}
                   type="submit"
                   className="mt-2 font-semibold text-base w-[20rem]"
                 />

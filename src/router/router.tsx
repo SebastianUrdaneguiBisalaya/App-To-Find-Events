@@ -70,6 +70,14 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/userinfo",
+        element: (
+          <ProtectedRoute>
+            <UserInfo />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   {
@@ -79,13 +87,5 @@ export const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
-  },
-  {
-    path: "/userinfo",
-    element: (
-      <ProtectedRoute>
-        <UserInfo />
-      </ProtectedRoute>
-    ),
   },
 ]);

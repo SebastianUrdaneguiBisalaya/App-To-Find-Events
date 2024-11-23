@@ -8,6 +8,7 @@ import { SignUpFormFields, SignUpSchema } from "../schema/SignUp.schema";
 
 export const SignUp: React.FC = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const { signUp, isAuthenticated } = useAuthStore((state) => state);
 
@@ -27,12 +28,15 @@ export const SignUp: React.FC = () => {
 
   const onSubmit: SubmitHandler<SignUpFormFields> = async (data) => {
     try {
+      setIsLoading(true);
       const { response } = await signUp(data);
       if (response?.error) {
         setError(response.error.message);
       }
     } catch (err: any) {
       setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -91,7 +95,7 @@ export const SignUp: React.FC = () => {
               />
               {error && <span className="text-red-500 text-sm text-center">{error}</span>}
               <Button
-                text="Regístrate"
+                text={isLoading ? "Cargando..." : "Regístrate"}
                 type="submit"
                 className="mt-2 font-semibold text-base w-[20rem]"
               />
