@@ -81,7 +81,7 @@ export const Login: React.FC = () => {
                 Encuentra el evento perfecto para ti
               </h2>
               <img
-                src="./src/assets/celebration.svg"
+                src="https://res.cloudinary.com/drzumfcdp/image/upload/v1732673008/Frame_tayo1k.png"
                 alt="Celebration illustration"
                 className=" mi-w-[15rem] min-h-[14rem] w-[15rem] h-[14rem] sm:w-[20rem] sm:h-[18rem] md:hidden"
               />
