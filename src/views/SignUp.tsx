@@ -49,7 +49,7 @@ export const SignUp: React.FC = () => {
               <h1 className="text-primary font-bold text-3xl">ExploreQ</h1>
             </div>
             <img
-              src="./src/assets/celebration.png"
+              src="https://res.cloudinary.com/drzumfcdp/image/upload/v1732673008/Frame_tayo1k.png"
               alt="Celebration illustration"
               className="max-h-[26.6rem] w-full hidden md:block"
             />
