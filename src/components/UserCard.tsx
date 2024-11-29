@@ -9,7 +9,9 @@ interface UserCardProps {
 }
 
 export const UserCard: React.FC<UserCardProps> = ({ name, lastName, email, avatar, userId }) => {
-  const [currentAvatar, setCurrentAvatar] = useState(avatar);
+  const [currentAvatar, setCurrentAvatar] = useState(
+    avatar || "https://cdn-icons-png.flaticon.com/512/10813/10813372.png",
+  );
 
   const changeProfileImage = async () => {
     const fileInput = document.createElement("input");
